@@ -59,3 +59,57 @@
         print(f"{name:.^10}")  # 가운데 정렬, 공백을 .로 채움
         ```
 - Python 3.6 이상에서만 사용가능
+
+<br>
+
+---
+
+<br>
+
+# **kwargs
+- kwargs = keyword arguments
+- 파이썬 함수에 이름 있는 인자들을 넘길 때 사용되는 형식
+- 내부적으로는 딕셔너리 형태로 처리
+- 키워드 인자(이름 있는 인자)를 딕셔너리 형태로 수집
+- 다른 언어에도 존재함 (다만 문법은 다름)
+
+## Flask에서
+- 예
+    ```
+    def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+    ```
+
+    - login_required 데코레이터가 위와 같이 정의된 경우
+        - 예1 - 파라미터 없는 뷰
+            ```
+            @app.route('/dashboard')
+            @login_required
+            def dashboard():
+                return '대시보드'
+            ```
+            - 이 경우엔 wrapped_view()가 호출될 때 **kwargs는 빈 딕셔너리
+            - `wrapped_view() → kwargs == {}`
+        - 예2 - 파라미터 있는 뷰
+            ```
+            @app.route('/post/<int:id>')
+            @login_required
+            def post_detail(id):
+                return f'{id}번 게시물입니다.'
+            ```
+            - 사용자가 /post/5로 접속하면 `wrapped_view(id=5) → kwargs == {'id': 5}`
+            - Flask는 URL에서 `<int:id>`를 추출해서 kwargs로 넘겨줌
+
+<br>
+
+---
+
+<br>
+
