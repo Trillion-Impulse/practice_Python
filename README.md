@@ -184,7 +184,22 @@
     {{ name | lower }}     {# 소문자로 변환 #}
     {{ title | length }}   {# 길이 출력 #}
     ```
-- 자주 쓰는 필터: lower, upper, capitalize, length, replace, default, safe 등
+- 자주 쓰는 필터
+    - lower: 소문자로 변환
+    - upper: 대문자로 변환
+    - capitalize: 첫 글자만 대문자, 나머지는 소문자
+    - length: 문자열, 리스트 등의 길이 반환
+    - replace: 문자열 바꾸기
+    - default: 값이 비어있을 때 기본값 설정
+    - safe: HTML 이스케이프 방지 (즉, HTML 태그 그대로 출력)
+        - 예시
+        ```
+        {{ "<b>중요</b>" | safe }}
+        ```
+            - 일반적으로는 <b>중요</b> → &lt;b&gt;중요&lt;/b&gt; 로 출력
+            - safe를 쓰면 태그 그대로 렌더링됩니다 → 굵게 보임
+        - 외부에서 입력받은 문자열을 safe로 그대로 출력하면 XSS(크로스사이트 스크립팅) 위험
+        - 사용자가 `<script>` 같은 코드를 입력하면 실행될 수 있기 때문에, safe는 신뢰할 수 있는 데이터에만 써야 함
 
 ## 매크로 (재사용 가능한 템플릿 함수)
 ```
