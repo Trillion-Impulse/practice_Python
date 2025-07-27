@@ -113,3 +113,87 @@
 
 <br>
 
+# jinja2 문법
+- Jinja2는 Python에서 널리 사용되는 템플릿 엔진
+- Flask, Django 등 웹 프레임워크에서도 자주 사용
+
+## 변수 출력
+```
+{{ 변수명 }}
+
+{{ user.name }}        {# 객체 속성 접근 #}
+{{ items[0] }}         {# 리스트/딕셔너리 인덱스 접근 #}
+```
+
+## 제어문 (조건문, 반복문 등)
+- if / elif / else
+    ```
+    {% if user.is_admin %}
+    관리자입니다.
+    {% elif user.is_guest %}
+    게스트입니다.
+    {% else %}
+    일반 사용자입니다.
+    {% endif %}
+    ```
+- for 문
+    ```
+    {% for item in items %}
+        {{ item }}
+    {% endfor %}
+    ```
+
+## 주석
+```
+{# 이것은 주석입니다. #}
+```
+
+## 필터 사용 (| 기호 사용)
+- 예시
+    ```
+    {{ name | lower }}     {# 소문자로 변환 #}
+    {{ title | length }}   {# 길이 출력 #}
+    ```
+- 자주 쓰는 필터: lower, upper, capitalize, length, replace, default, safe 등
+
+## 매크로 (재사용 가능한 템플릿 함수)
+```
+{% macro input(name, value='', type='text') %}
+  <input type="{{ type }}" name="{{ name }}" value="{{ value }}">
+{% endmacro %}
+
+{{ input('username') }}
+```
+
+## 템플릿 상속
+- base.html
+    ```
+    <!DOCTYPE html>
+    <html>
+        <head>{% block head %}{% endblock %}</head>
+        <body>{% block content %}{% endblock %}</body>
+    </html>
+    ```
+- child.html
+    ```
+    {% extends "base.html" %}
+
+    {% block head %}
+        <title>페이지 제목</title>
+    {% endblock %}
+
+    {% block content %}
+        <h1>콘텐츠</h1>
+    {% endblock %}
+    ```
+
+## include (템플릿 포함)
+```
+{% include "header.html" %}
+```
+
+<br>
+
+---
+
+<br>
