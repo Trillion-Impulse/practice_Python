@@ -142,6 +142,36 @@
         {{ item }}
     {% endfor %}
     ```
+    - for문 안에서 쓰이는 인덱스 관련 변수들
+        - loop.index: 1부터 시작하는 인덱스
+        - loop.index0: 0부터 시작하는 인덱스
+        - loop.revindex: 끝에서부터 1부터 세는 인덱스
+        - loop.revindex0: 끝에서부터 0부터 세는 인덱스
+        - loop.first: 현재 반복이 첫 번째인가
+        - loop.last: 현재 반복이 마지막인가
+        - loop.length: 전체 반복 횟수
+        ```
+        {# 인덱스 번호 넣고 싶을 때 예시 #}
+        <ul>
+        {% for user in users %}
+            <li>{{ loop.index }}. {{ user.name }}</li>
+        {% endfor %}
+        </ul>
+
+        {# 첫 번째 요소만 강조하거나, separator 다르게 넣고 싶을 때 예시 #}
+        {% for item in items %}
+            {% if loop.first %}
+                <strong>첫 번째:</strong> {{ item }}
+            {% else %}
+                {{ item }}
+            {% endif %}
+        {% endfor %}
+
+        {# 마지막 요소 뒤에는 쉼표를 안 넣는 예시 #}
+        {% for item in items %}
+            {{ item }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+        ```
 
 ## 주석
 ```
