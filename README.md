@@ -218,9 +218,21 @@
     ```
 
 ## include (템플릿 포함)
-```
-{% include "header.html" %}
-```
+- 예시
+    ```
+    {# 예를 들어, header.html이라는 파일을 현재 페이지 상단에 포함하고 싶다면 #}
+    <!DOCTYPE html>
+    <html>
+        <body>
+            {% include "header.html" %}
+            <p>메인 콘텐츠</p>
+        </body>
+    </html>
+    ```
+- 공통 레이아웃을 재사용하고 싶을 때 사용
+- include는 단순 삽입이라서 불러오려는 템플릿(예시의 header.html) 안에 `{% block %}` 같은 건 사용할 수 없음
+    - include는 단순히 그 파일의 HTML이나 템플릿 코드를 그대로 불러오는 것
+    - 그래서 `{% block %}`을 선언해도 해석되지 않고 무시되거나 이상한 동작할 가능성 존재
 
 <br>
 
