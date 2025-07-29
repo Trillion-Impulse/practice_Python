@@ -6,6 +6,27 @@
 
 <br>
 
+# print
+- 기본구조
+    ```
+    print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)
+    ```
+    - *objects: 출력할 여러 개의 값
+    - sep: 출력할 때 여러 값 사이에 넣을 구분 문자 (separator)
+        - 기본값: ' ' (공백)
+    - end: 출력 마지막에 자동으로 붙는 문자열 (end of line)
+        - 기본값: '\n' (줄바꿈)
+    - file: 출력 대상 (기본은 화면/콘솔, 파일 객체로 바꿀 수도 있음)
+        - 기본값: `sys.stdout`
+    - flush: 출력 버퍼를 강제로 비울지 여부 (True면 바로 출력됨 — 로그 등에서 유용)
+        - 기본값: False
+
+<br>
+
+---
+
+<br>
+
 # f-string (formatted string literal)
 - 기본구조
     - 문자열 앞에 `f` 또는 `F`를 붙이고, `"` 혹은 `'`로 문자열을 묶음
