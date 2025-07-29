@@ -1,5 +1,11 @@
 # practice_Python
 
+<br>
+
+---
+
+<br>
+
 # f-string (formatted string literal)
 - 기본구조
     - 문자열 앞에 `f` 또는 `F`를 붙이고, `"` 혹은 `'`로 문자열을 묶음
