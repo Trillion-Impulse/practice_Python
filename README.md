@@ -254,3 +254,133 @@
 ---
 
 <br>
+
+# 코딩 테스트
+
+1. 문제 1
+    ```
+    a, b = open(0)
+    for x in *b[2::-1], b:
+        print(int(a) * int(x))
+    ```
+    - `open()`은 파이썬의 내장 함수로, 보통은 파일을 열 때 사용하는 함수
+        - `open(0)`은 파일 대신 '파일 번호 0'을 여는 것
+            - 표준 입력 (stdin)을 의미
+            - 입력을 여러 줄 받을 때 사용
+            ```
+            a, b = open(0)
+            
+            위의 코드는 아래의 코드와 같은 역할
+
+            import sys
+            a = sys.stdin.readline()
+            b = sys.stdin.readline()
+            ```
+        - 파이썬에서 `open(0)` 같은 표현은 파일 디스크립터(file descriptor) 를 사용하는 것
+            - 운영체제 수준의 개념
+            - 운영체제는 파일이나 입출력 장치를 숫자로 구분
+                - 0: 표준 입력(stdin)
+                - 1: 표준 출력(stdout)
+                - 2: 표준 에러(stderr)
+            - 따라서
+                - open(0): 키보드에서 입력 받기 (stdin)
+                - open(1): 화면에 출력하기 위한 파일 핸들 (stdout) – 쓰기 전용
+                - open(2): 에러 메시지 출력용 (stderr) – 쓰기 전용
+            - 쓰기 전용은 read()하면 에러 발생
+                ```
+                아래와 같이 사용해야 함
+                f = open(1)  # stdout 열기
+                f.write("Hello\n")  # 화면에 출력됨
+                ```
+            - print가 있기때문에 일반적으로 open(1)은 거의 안 씀
+        - 여러 입력 방법의 차이
+            | 구분 | input() | sys.stdin.readline() | sys.stdin.read() | open(0) |
+            |-----|-----|-----|-----|-----|
+            | 입력 단위 | 한 줄 | 한 줄 | 전체 입력 | 여러 줄 (iterable) |
+            | 줄바꿈 포함 | 제거됨 | 포함됨 (\n 있음) | 포함됨 (\n 있음) | 포함됨 (\n 있음) |
+            | 속도 | 느림 | 빠름 | 매우 빠름 | 빠름 |
+            | 가공 여부 | 줄바꿈 제거 포함됨 | 순수 입력 그대로 | 순수 입력 그대로 | 순수 입력 그대로 |
+            | 사용 방식 | 고수준 함수 | 저수준 함수 | 저수준 함수 | 파일 객체처럼 취급 |
+            | 반복문 사용 | 불편 (반복 안됨) | 불편 (반복 안됨) | 한 번만 호출 가능 | for line in open(0) 가능 |
+            | 실전 사용 용도 | 일반적인 간단 입력 | 반복문 많은 줄 입력 | 전체 입력 후 처리 | 짧고 간단한 코드 작성 |
+            - input()
+                - 기본 내장 함수
+                - 사용자 입력을 한 줄 받고, `\n`은 자동 제거
+                - 내부적으로는 `sys.stdin.readline().rstrip('\n')` 같은 동작
+            - sys.stdin.readline()
+                - `\n` 포함됨, 그래서 s.strip()이나 s.rstrip() 필요
+                    - strip()
+                        - 앞뒤 공백이나 줄바꿈 \n 등을 제거
+                        - 좌우 모두 제거
+                    - rstrip()
+                        - 오른쪽 (right)만 제거
+                        - 주로 줄바꿈만 제거하고 싶을 때 사용
+            - sys.stdin.read()
+                - 입력 전체를 한꺼번에 읽음
+                - 한 번에 다 읽기 때문에 반복문 쓰기 전 직접 가공 필요
+                    ```
+                    nums = list(map(int, sys.stdin.read().split()))
+                    ```
+                    - split()
+                        - 공백 기준으로 문자열을 나눠서 리스트로 만듦
+                        - 본 구분자: " " (공백)
+                        - 인자로 구분자를 줄 수도 있음
+                    - splitlines()
+                        - 문자열을 줄 단위로 나눔 (`\n, \r\n, \r` 모두 대응)
+                            - `\r`: 현재 줄에서 커서를 맨 앞으로 이동시키는 명령
+                        - 줄바꿈 문자들은 제거됨
+            - open(0)
+                - 표준 입력을 파일처럼 여는 트릭
+                - 줄바꿈 포함됨, .strip() 필요
+            - 속도 차이 (코딩테스트에서 중요)
+                - input()은 내부적으로 sys.stdin.readline()을 호출하고, 추가 처리를 함
+                - 그래서 많은 입력을 받을 때는 sys.stdin.readline()이 훨씬 빠름
+            - 예제
+                ```
+                입력으로 다음이 들어온다고 가정
+                3 4
+                7 8
+                이걸 읽어서 두 줄을 각각 a, b로 받고,
+                각 줄을 공백 기준으로 정수 리스트로 바꿔보기
+                결과 → a = [3, 4], b = [7, 8]
+                ```
+                - input() (두 번 사용)
+                    ```
+                    a = list(map(int, input().split()))
+                    b = list(map(int, input().split()))
+                    print(a, b)
+                    ```
+                - sys.stdin.readline()
+                    ```
+                    import sys
+                    a = list(map(int, sys.stdin.readline().strip().split()))
+                    b = list(map(int, sys.stdin.readline().strip().split()))
+                    print(a, b)
+                    ```
+                    - strip()으로 줄바꿈 \n 제거
+                - sys.stdin.read() (전체 입력 후 분할)
+                    ```
+                    import sys
+                    lines = sys.stdin.read().splitlines()
+                    a = list(map(int, lines[0].split()))
+                    b = list(map(int, lines[1].split()))
+                    print(a, b)
+                    ```
+                    - splitlines()로 줄 기준 분리
+                    - 각 줄을 다시 split()해서 숫자로 변환
+                - open(0) (파일처럼 읽기)
+                    ```
+                    lines = list(open(0))  # 표준 입력 전체를 줄 단위로 읽음
+                    a = list(map(int, lines[0].split()))
+                    b = list(map(int, lines[1].split()))
+                    print(a, b)
+                    ```
+                    - vs sys.stdin.read()
+                        - sys.stdin.read()는 전체를 읽기 때문에 줄 기준 분리 해야됨
+                        - open(0)은 줄 단위로 읽기 때문에 줄 단위 분리 필요 없음
+
+<br>
+
+---
+
+<br>
