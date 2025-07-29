@@ -66,6 +66,51 @@
 
 <br>
 
+# 리스트 컴프리헨션
+- 파이썬에서 리스트를 간결하고 빠르게 만드는 문법
+- 언제 사용하는가
+    - 리스트를 빠르게 만들고 싶을 때
+    - map() 대신 직관적으로 쓰고 싶을 때
+    - 이중 반복 (중첩 루프)도 짧게 쓰고 싶을 때
+- `[표현식 for 변수 in 반복가능한객체]`
+    - 일반적인 for문
+        ```
+        squares = []
+        for i in range(5):
+            squares.append(i * i)
+        ```
+    - 리스트 컴프리핸션
+        ```
+        squares = [i * i for i in range(5)]
+        ```
+    - 중첩 for문도 가능
+        ```
+        [i + j for i in [1, 2] for j in [10, 20]]
+
+        결과: [11, 21, 12, 22]
+        ```
+        - 바깥→안쪽 순서대로 실행
+- `[표현식 for 변수 in 반복가능한객체 if 조건]`
+    - 예: 짝수만 제곱
+        ```
+        [i * i for i in range(10) if i % 2 == 0]
+        ```
+- map, split, input과 함께 쓰기
+    - 예: 공백으로 구분된 숫자 입력 받아 리스트로 만들기
+    ```
+    일반적인 표현
+    nums = list(map(int, input().split()))
+
+    리스트 컴프리핸션
+    nums = [int(x) for x in input().split()]
+    ```
+
+<br>
+
+---
+
+<br>
+
 # **kwargs
 - kwargs = keyword arguments
 - 파이썬 함수에 이름 있는 인자들을 넘길 때 사용되는 형식
