@@ -201,6 +201,38 @@
 
 <br>
 
+# 함수
+
+## sorted()
+- 반복 가능한 객체(iterable)를 정렬된 리스트로 반환
+- sorted()는 리스트, 문자열, 튜플, 집합 등 거의 모든 iterable에서 작동
+- 기본 구조
+    ```
+    sorted(iterable, key=None, reverse=False)
+    ```
+    - key: 정렬의 기준이 될 함수
+        - 기본값: None (요소 직접 비교)
+        - 예
+            - len: 길이
+            - str.lower 또는 str.upper: 대소문자 무시
+            - lambda 함수
+            - itemgetter(n)
+            - 사용자 정의 함수
+    - reverse: 내림차순 정렬
+        - 기본값: False
+- 예시
+    ```
+    nums = [3, 1, 4]
+    print(sorted(nums))  # [1, 3, 4]
+    ```
+    - sorted()는 원본을 바꾸지 않고, 정렬된 새 리스트를 리턴
+
+<br>
+
+---
+
+<br>
+
 # **kwargs
 - kwargs = keyword arguments
 - 파이썬 함수에 이름 있는 인자들을 넘길 때 사용되는 형식
