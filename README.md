@@ -244,6 +244,20 @@
 
 <br>
 
+# 변수
+
+## 특별 변수명
+
+### _ (underscore)
+- underscore, throwaway variable, dummy variable 여러 가지 이름이 존재
+- 파이썬에서 `사용하지 않을 값을 임시로 받는 변수`로 관례적으로 사용
+
+<br>
+
+---
+
+<br>
+
 # **kwargs
 - kwargs = keyword arguments
 - 파이썬 함수에 이름 있는 인자들을 넘길 때 사용되는 형식
