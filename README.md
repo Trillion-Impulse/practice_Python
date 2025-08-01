@@ -238,6 +238,29 @@
     print(unique)  # {1, 2, 3}
     ```
 
+## range()
+- range 객체 (range type) 를 반환
+- for 반복문, 슬라이싱, 리스트 변환 등에서 사용 가능
+- 메모리를 효율적으로 사용 (→ 값을 미리 저장하지 않고, 필요할 때 생성하는 lazy evaluation 방식)
+- range 객체
+    - iterable: 반복 가능한 객체 (for문, list, tuple 등에서 사용 가능)
+    - indexable: 인덱싱 가능 (r[0], r[-1] 등)
+    - sliceable: 슬라이싱 가능 (r[1:4])
+    - len(r): range 내 숫자의 개수를 반환
+    - in 연산자: 특정 값이 포함되어 있는지 확인 가능
+    - == 연산자: 값이 같으면 다른 range라도 같다고 판단함 (range(1, 4) == range(1, 4, 1))
+- 기본 구조
+    ```
+    range(stop)
+    range(start, stop)
+    range(start, stop, step)
+    ```
+    - start: (선택, 기본값 0) 반복 시작 숫자
+    - stop: (필수) 반복이 멈출 숫자 (이 숫자는 포함되지 않음)
+    - step: (선택, 기본값 1) 증가/감소 간격. 음수도 가능
+        - step이 0이면 ValueError 발생
+        - 음수 step도 가능하지만, start > stop 형태로 써야 함
+
 <br>
 
 ---
