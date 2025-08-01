@@ -261,6 +261,18 @@
         - step이 0이면 ValueError 발생
         - 음수 step도 가능하지만, start > stop 형태로 써야 함
 
+## exec()
+- 문자열로 작성된 파이썬 코드를 실제로 실행하는 함수
+- execute의 줄임말
+- 기본 구조
+    ```
+    exec(expression_string)
+    ```
+    - expression_string: 파이썬 코드가 들어있는 문자열
+    - 실행 결과는 별도의 반환값이 없고, 그냥 코드가 실행되는 것
+- 숏코딩처럼 짧게 쓰고 싶을 때 사용
+- 보안과 가독성에 주의
+
 <br>
 
 ---
