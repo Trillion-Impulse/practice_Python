@@ -317,6 +317,59 @@
 
 <br>
 
+# starred expression
+- `*` 기호를 사용하여 여러 값을 한 번에 unpack하거나 pack할 수 있게 해주는 문법
+- `*`의 의미
+    - `*`는 iterable (리스트, 튜플 등)을 unpack하는 데 사용
+        - iterable이 아니면 `*`는 사용 불가
+        - `iterable`: Python에서 반복(iteration)이 가능한 객체
+            - 즉 for 루프 같은 반복문에서 하나씩 꺼내 쓸 수 있는 객체
+            - 반복 가능한 `데이터`
+            - 리스트, 튜플, 문자열, 딕셔너리, 집합 등등
+    - `**`는 dict를 unpack할 때 사용
+- 함수 정의에서 역할
+    - `*args`: 여러 위치 인자를 튜플로 묶어 받기
+    - `**kwargs`: 여러 키워드 인자를 딕셔너리로 받기
+- 함수 호출에서 역할
+    - `*args`: 리스트, 튜플 등을 위치 인자로 풀기
+    - `**kwargs`: 딕셔너리를 키워드 인자로 풀기
+- 리스트/튜플 등에서의 unpacking
+    - 예시
+        ```
+        numbers = [1, 2, 3, 4, 5]
+        a, *b, c = numbers
+        print(a)  # 1
+        print(b)  # [2, 3, 4]
+        print(c)  # 5
+        ```
+        - 중간에 *b를 사용하면, 나머지 값들을 리스트로 받음
+        - 단, starred expression은 unpacking에서 딱 하나만 사용 가능
+            - Python 3.11부터는 **다중 `*` unpacking도 가능**
+- 시퀀스 결합 시 사용 (Packing)
+    - 예시
+        ```
+        a = [1, 2]
+        b = [3, 4]
+        c = [*a, *b, 5]
+        print(c)  # [1, 2, 3, 4, 5]
+        ```
+        - 리스트나 튜플을 풀어서 새로운 리스트를 만들 때 사용
+- Dictionary unpacking (Python 3.5+)
+    - 예시
+        ```
+        dict1 = {'x': 1, 'y': 2}
+        dict2 = {'y': 3, 'z': 4}
+        merged = {**dict1, **dict2}
+        print(merged)  # {'x': 1, 'y': 3, 'z': 4}
+        ```
+        - 주의: 키가 겹치면 뒤의 값이 우선
+
+<br>
+
+---
+
+<br>
+
 # **kwargs
 - kwargs = keyword arguments
 - 파이썬 함수에 이름 있는 인자들을 넘길 때 사용되는 형식
