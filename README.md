@@ -374,6 +374,54 @@
     ```
     - zip(a, b)는 각 리스트의 같은 인덱스에 있는 원소들을 묶어서 `(a[0], b[0]), (a[1], b[1]) ...` 형태로 만들어 줌
 
+## max()
+- 가장 큰 값을 반환
+- 기본 구조
+    ```
+    max(iterable, *[, key, default]) → 최대값
+    max(arg1, arg2, *args[, key]) → 최대값
+    ```
+    - iterable 모드: max([1, 2, 3])
+        - iterable: 반복 가능한 객체 (리스트, 튜플, 문자열 등)
+        - 문자열의 경우 아스키 코드 값 기준
+        - 튜플의 경우 첫 번째 요소 기준, 같으면 두 번째 비교 == 사전식 비교
+        - 딕셔너리의 경우
+            ```
+            d = {'a': 3, 'b': 7, 'c': 5}
+            max(d)         # → 'c' (key 기준) 키끼리 비교
+            max(d.values())  # → 7 (value 기준) 값끼리 비교
+            max(d.items(), key=lambda x: x[1])  # → ('b', 7)
+                        이것도 value 기준비교하지만 items()이므로 키값 쌍을 반환
+            ```
+    - arg1, arg2, *args 모드: max(1, 2, 3)
+        - *args: 여러 개의 인자 전달 방식
+    - key: 비교 기준을 정의하는 함수
+        - 튜플, 문자열, 객체 등 비교 기준이 애매한 경우 사용
+        - key에는 함수 또는 lambda 표현식이 들어감
+        - 예시
+            ```
+            max(['apple', 'banana', 'kiwi'], key=len)
+            결과 → 'banana' (길이가 가장 긴 단어)
+
+            max([(1, 2), (3, 1)], key=lambda x: x[1])
+            결과 → (1, 2) (두 번째 요소 기준)
+            ```
+    - default: 빈 iterable인 경우 반환할 기본값 (없으면 ValueError), (Python 3.4+)
+        - 빈 iterable에서 max()를 호출하면 ValueError가 발생
+        - default를 주면, 예외 대신 기본값을 반환
+        - 예시
+            ```
+            max([], default=0)
+            결과 → 0
+            ```
+        - default는 오직 iterable을 사용하는 형태에서만 사용 가능
+            - 즉, max(1, 2, 3, default=0) ← 안 됨
+- 반환값
+    - 비교 기준에 맞는 최댓값 1개 반환
+    - 같은 최댓값이 여러 개일 경우 첫 번째 등장하는 값 반환
+- 기본적으로 비교 가능한 자료형끼리만 비교 가능
+    - 다른 타입끼리 비교할 경우 TypeError 발생
+
 <br>
 
 ---
