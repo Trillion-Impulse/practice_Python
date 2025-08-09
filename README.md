@@ -469,6 +469,32 @@
     "1-2-3".rsplit('-', 1)       # ['1-2', '3']
     ```
 
+## splitlines()
+- 줄 단위로 나눔 (\n, \r, \r\n 등 모두 인식)
+    - `\n` (LF: Line Feed, 유닉스/리눅스)
+    - `\r` (CR: Carriage Return, 구형 Mac)
+    - `\r\n` (CRLF: Windows)
+- 기본 구조
+    ```
+    splitlines(keepends=False)
+    ```
+    - keepends: 줄바꿈 문자를 결과에 포함할지 여부 (False가 기본값)
+        - True면 줄바꿈 문자도 포함
+- 예시
+    ```
+    s = "line1\nline2\rline3\r\nline4"
+    s.splitlines()
+    # ['line1', 'line2', 'line3', 'line4']
+
+    s.splitlines(keepends=True)
+    # ['line1\n', 'line2\r', 'line3\r\n', 'line4']
+
+    text = "a\n\nb"
+    print(text.splitlines())  
+    # 결과: ['a', '', 'b']
+    → 줄 사이에 빈 줄(\n\n)이 있어도 빈 문자열로 포함
+    ```
+
 <br>
 
 ---
