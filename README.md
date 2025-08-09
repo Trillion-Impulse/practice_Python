@@ -541,6 +541,29 @@
     sep이 없으면 ('', '', 원본문자열) 튜플 반환
     ```
 
+## join()
+- **문자열 리스트(또는 이터러블)**를 하나의 문자열로 구분자와 함께 이어 붙이는 메서드
+- 기본 구조
+    ```
+    '구분자'.join(반복가능한_문자열들)
+    ```
+    - '구분자': 문자열 사이에 넣을 텍스트 (예: " ", ",", "\n" 등)
+    - 반복가능한_문자열들: 문자열들로 구성된 리스트, 튜플 등
+        - join()의 인자는 반드시 문자열들이 iterable이어야 함 (list, tuple, set, 등)
+        - 숫자 같은 문자열이 아닌 요소가 포함되어 있으면 TypeError
+            - TypeError 예시
+                ```
+                nums = ['1', 2, '3']
+                print(','.join(nums))  # TypeError: sequence item 1: expected str instance, int found
+                ```
+                - 반드시 모든 요소가 문자열이어야 함
+- 예시
+    ```
+    words = ['apple', 'banana', 'cherry']
+    result = ', '.join(words)
+    print(result)  # apple, banana, cherry
+    ```
+
 <br>
 
 ---
