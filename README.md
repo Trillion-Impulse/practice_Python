@@ -579,6 +579,17 @@
     print(result)  # apple, banana, cherry
     ```
 
+## 세트 메서드
+
+### add()
+- 집합에 **요소 하나**를 추가
+- 기본 구조
+    ```
+    set.add(element)
+    ```
+    - 반환값 없음 (None)
+    - 집합 객체를 그 자리에서 직접 변경
+
 <br>
 
 ---
