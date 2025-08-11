@@ -659,6 +659,32 @@
     print(result)  # apple, banana, cherry
     ```
 
+### find()
+- 문자열 안에서 특정 문자열(문자 또는 문자열)을 찾아서, 처음 등장하는 위치(인덱스)를 반환하는 문자열 메서드
+- 기본 구조
+    ```
+    string.find(substring, start=0, end=len(string))
+    ```
+    - `substring`: 찾고자 하는 부분 문자열 (필수)
+    - `start`: 검색을 시작할 인덱스 (기본: 0)
+    - `end`: 검색을 멈출 인덱스 (기본: 문자열 끝까지)
+- 반환값
+    - 찾으면: 처음 등장하는 인덱스 (0부터 시작)
+    - **없으면: -1**
+- 예시
+    ```
+    text = "hello world"
+    print(text.find("o"))     # 결과: 4
+    print(text.find("world")) # 결과: 6
+    print(text.find("z"))     # 결과: -1
+
+    text = "banana"
+    print(text.find("a", 2))        # 결과: 3 (인덱스 2부터 찾음)
+    print(text.find("a", 2, 4))     # 결과: 3 (인덱스 2~3까지만 탐색)
+    print(text.find("a", 4, 6))     # 결과: 5
+    print(text.find("a", 6))        # 결과: -1
+    ```
+
 ## 세트 메서드
 
 ### add()
