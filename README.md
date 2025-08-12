@@ -515,6 +515,37 @@
 - character의 약자
     - 문자
 
+## enumerate()
+- 반복(iteration)할 때 **인덱스와 값을 동시에** 가져올 수 있는 함수
+- *enumerate: 하나하나 열거하다, 번호를 붙이며 나열하다*
+- 기본 구조
+    ```
+    for index, value in enumerate(iterable, start=0):
+        ...
+    ```
+    - iterable: 리스트, 문자열, 튜플 등 반복 가능한 것
+    - index: 현재 요소의 인덱스
+    - value: 해당 인덱스의 실제 값
+    - start=0: 인덱스를 몇부터 시작할지 (기본값은 0)
+- 예시
+    ```
+    # 리스트에서 인덱스와 값 같이 얻기
+    fruits = ['apple', 'banana', 'cherry']
+
+    for i, fruit in enumerate(fruits):
+        print(i, fruit)
+            0 apple
+            1 banana
+            2 cherry
+    
+    # 인덱스를 1부터 시작하고 싶을 때
+    for i, fruit in enumerate(fruits, start=1):
+        print(i, fruit)
+            1 apple
+            2 banana
+            3 cherry
+    ```
+
 <br>
 
 ---
