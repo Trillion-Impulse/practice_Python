@@ -741,6 +741,43 @@
     print(text.find("a", 6))        # 결과: -1
     ```
 
+### replace()
+- 문자열(string)에서 부분 문자열을 다른 문자열로 바꾸는 메서드
+- 기본 구조
+    ```
+    str.replace(old, new[, count])
+    ```
+    - old: 바꾸고자 하는 기존 부분 문자열 (필수)
+    - new: 대체할 새 문자열 (필수)
+    - count: 바꿀 횟수 (선택, 기본값은 모든 항목을 바꿈)
+        - *`[, count]`이 표기는 문서나 설명에서 해당 매개변수가 선택적이라는 뜻*
+- 반환값
+    - old를 new로 바꾼 **새로운 문자열(str)**을 반환
+    - `원본 문자열을 변경하지 않고, 새로운 문자열을 반환`
+    - 문자열은 불변(immutable)하기 때문에 replace()를 호출해도 원본 문자열에는 아무런 영향을 주지 않음
+    - 따라서 `i=i.replace(a,b)` 형식으로 사용해야 원본을 바꿀 수 있음
+- 예시
+    ```
+    # 기본 사용
+    text = "apple banana apple"
+    new_text = text.replace("apple", "orange")
+    print(new_text)  # "orange banana orange"
+
+    # 특정 횟수만 교체 (count 인자 사용)
+    text = "apple apple apple"
+    new_text = text.replace("apple", "orange", 2)
+    print(new_text)  # "orange orange apple"
+
+    # 원본 문자열 유지 확인
+    text = "hello world"
+    text.replace("world", "python")
+    print(text)  # "hello world"  (원본 그대로)
+    ```
+- 주의 사항
+    - 대소문자를 구분
+    - old에 해당하는 부분 문자열이 없으면 변경 없이 원본 문자열 그대로 반환
+    - count가 0이면 아무 것도 변경되지 않음
+
 ## 세트 메서드
 
 ### add()
