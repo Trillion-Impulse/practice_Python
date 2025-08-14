@@ -1389,6 +1389,22 @@
     - 위의 예를 적용하면, `(*B,)=range(1,N+1)` 이런 형태와 같음
         - 따라서 B에 1부터 N까지의 정수가 리스트 형태로 들어감
 
+7. 문제 7
+    ```
+    import re
+    print(len(re.sub('dz=|[ln]j|\w\W','Z',input())))
+    ```
+    - `re.sub`: pattern에 맞는 부분들을 repl로 치환
+    - 패턴: `'dz=|[ln]j|\w\W'`
+        - `dz=`: 이렇게 생긴 문자열
+        - `[ln]j`: "lj" 또는 "nj" (l 또는 n 다음에 j) - 정규 표현식
+            - 정규 표현식에서 [] 안은 문자 클래스(character class)
+                - `[ln]`은 'l' 또는 'n' 중 하나를 의미
+        - `\w\W`: 임의의 두 문자 조합 - 정규 표현식
+            - 정규 표현식에서 메타문자(meta characters)
+            - `\w`는 알파벳 대소문자/숫자/언더바 (word character)
+            - `\W`는 알파벳/숫자/언더바가 아닌 문자 (non-word character)
+
 <br>
 
 ---
