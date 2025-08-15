@@ -1491,6 +1491,22 @@
             - `\w`는 알파벳 대소문자/숫자/언더바 (word character)
             - `\W`는 알파벳/숫자/언더바가 아닌 문자 (non-word character)
 
+8. 문제 8
+    ```
+    print(sum([*x]==sorted(x,key=x.find)for x in open(0))-1)
+    ```
+    - `[ *x ]`: 문자열 x를 리스트로 풀어줌
+        - 예: "abca" → ['a','b','c','a']
+    - `sorted(x, key=x.find)`: 문자열을 문자가 처음 등장한 순서대로 정렬
+        - "abca"
+            - x.find('a')=0, x.find('b')=1, x.find('c')=2, x.find('a')=0
+            - 정렬 결과: ['a','a','b','c']
+            - 중복 문자가 떨어져서 등장한 경우를 판별
+    - sum(... for x in open(0))
+        - 위 비교의 결과가 True/False가 되므로, True=1, False=0
+        - sum(...)으로 그룹 단어인 개수만 셈
+        - 파이썬에서는 True와 False도 숫자로 취급
+
 <br>
 
 ---
