@@ -597,6 +597,40 @@
     print(result)  # "apple # banana #"
     ```
 
+## sum()
+- 반복 가능한(iterable) 객체의 항목들을 왼쪽부터 오른쪽으로 합산하여 총합을 반환하는 내장 함수
+- 기본 구조
+    ```
+    sum(iterable, start=0)
+    ```
+    - iterable: 리스트, 튜플, 제너레이터 등 반복 가능한 객체
+        - bool 타입도 가능: True는 1, False는 0으로 취급
+        - Decimal, Fraction 도 가능
+            ```
+            from decimal import Decimal
+            from fractions import Fraction
+
+            decimals = [Decimal('1.1'), Decimal('2.2')]
+            print(sum(decimals))  # 출력: 3.3 (Decimal 타입)
+
+            fractions = [Fraction(1, 3), Fraction(2, 3)]
+            print(sum(fractions))  # 출력: 1
+            ```
+    - start: (선택) 합계를 시작할 초기값. 기본은 0
+- 예시
+    ```
+    # 기본 사용
+    numbers = [1, 2, 3, 4, 5]
+    print(sum(numbers))  # 출력: 15
+
+    # 초기값을 지정
+    numbers = [1, 2, 3]
+    print(sum(numbers, 10))  # 출력: 16 (10 + 1 + 2 + 3)
+    ```
+- 주의사항
+    - 문자열의 합은 지원하지 않음
+        -문자열을 합치려면 join()을 사용
+
 <br>
 
 ---
