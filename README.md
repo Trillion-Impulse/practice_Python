@@ -175,6 +175,45 @@
 
 <br>
 
+# 키워드 (예약어)
+
+## lambda
+- **익명 함수(이름이 없는 함수)**를 만들 때 사용
+- 일반적으로 `def` 키워드를 사용해 함수를 정의하지만, 간단한 함수를 짧게 표현하고 싶을 때 `lambda` 키워드를 사용
+- 기본 구조
+    ```
+    lambda 매개변수: 표현식
+    ```
+    - 매개변수: 함수에 전달할 값 (0개 이상)
+    - 표현식: 반환값을 계산하는 식 (단일 표현식만 가능)
+- 예시
+    ```
+    # 기본적인 사용 두 수 더하기
+    add = lambda x, y: x + y
+    print(add(3, 5))  # 출력: 8
+
+    # sorted()에서 key로 사용
+    students = [("철수", 90), ("영희", 80), ("민수", 95)]
+    sorted_students = sorted(students, key=lambda x: x[1])
+    print(sorted_students)  # 점수 기준으로 정렬
+
+    # map()과 함께 사용
+    nums = [1, 2, 3, 4]
+    squared = list(map(lambda x: x ** 2, nums))
+    print(squared)  # [1, 4, 9, 16]
+
+    # filter()와 함께 사용
+    nums = [1, 2, 3, 4, 5]
+    even = list(filter(lambda x: x % 2 == 0, nums))
+    print(even)  # [2, 4]
+    ```
+
+<br>
+
+---
+
+<br>
+
 # 연산자
 
 ## %
