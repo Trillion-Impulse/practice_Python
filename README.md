@@ -836,6 +836,63 @@
     ```
     - 중복 제거를 원하면 set()으로 감쌀 수 있음
 
+## combinations()
+- 조합을 구할 때 사용하는 함수
+    - 조합: 주어진 항목들 중에서 일부를 선택하는 경우의 수, 선택한 순서는 고려하지 않음
+        - "A와 B를 뽑는 것"과 "B와 A를 뽑는 것"은 같은 조합
+    - nCr = n! / (r! × (n - r)!)
+- 기본 구조
+    ```
+    from itertools import combinations
+
+    itertools.combinations(iterable, r)
+    ```
+    - iterable: 리스트, 튜플, 문자열 등 반복 가능한 객체
+    - r (필수): 조합을 구성할 원소의 개수 (반드시 지정해야 함)
+- 반환값
+    - 조합의 튜플을 담은 이터레이터(iterator)를 반환
+    - 각 조합은 정렬된 원소의 튜플로 표현
+    - 순서를 고려하지 않기 때문에 (A, B)와 (B, A)는 하나만 포함됨
+- 예시
+    ```
+    # 예시 1: 숫자 리스트에서 조합
+
+    from itertools import combinations
+
+    data = [1, 2, 3]
+    result = list(combinations(data, 2))
+
+    print(result)
+    # 출력: [(1, 2), (1, 3), (2, 3)]
+    # 3개의 원소 중 2개를 뽑는 모든 조합을 반환
+    # 3C2 = 3가지 조합
+
+    # 예시 2: 문자열에서 조합
+
+    from itertools import combinations
+
+    word = "ABC"
+    result = list(combinations(word, 2))
+
+    print(result)
+    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'C')]
+    # 문자열도 iterable이므로 조합 생성 가능
+    # 문자열로 합치고 싶다면:
+    [''.join(p) for p in combinations(word, 2)]
+    # 출력: ['AB', 'AC', 'BC']
+
+    # 예시 3: 중복된 원소가 있을 때
+
+    from itertools import combinations
+
+    data = [1, 1, 2]
+    result = list(combinations(data, 2))
+    print(result)
+    # 출력: [(1, 1), (1, 2), (1, 2)]
+    # 입력에 중복이 있으면 결과에도 중복된 조합이 나올 수 있음
+    # 하지만 combinations() 자체는 중복된 조합을 의도적으로 생성하지는 않음
+    ```
+
 <br>
 
 ---
