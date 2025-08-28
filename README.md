@@ -769,6 +769,73 @@
     # → False (3은 홀수라서)
     ```
 
+## permutations()
+- 순열을 구할 때 사용하는 함수
+    - 순열: 주어진 항목들 중에서 일부 또는 전부를 선택해서 순서를 고려하여 나열한 것
+        - 전체 순열: n개의 원소 → n!
+        - 부분 순열: n개 중 r개를 고름 → nPr = n! / (n - r)!
+- itertools 모듈에 포함
+- 기본 구조
+    ```
+    from itertools import permutations
+
+    itertools.permutations(iterable, r=None)
+    ```
+    - iterable: 반복 가능한 객체 (예: 리스트, 문자열, 튜플 등)
+    - r (선택): 순열을 구성할 원소 개수, 생략하면 기본값은 len(iterable) — 즉, 전체 순열을 생성함
+        - r을 지정하면, iterable에서 r개를 선택해 만들 수 있는 모든 순열이 생성됨
+        - 순열이므로 순서가 다르면 다른 결과로 간주됨
+- 반환값
+    - 반환값은 **이터레이터(iterator)**
+    - 각 순열은 튜플(tuple) 형태로 반환
+    - 반복문 또는 list()로 변환하여 사용 가능
+    ```
+    from itertools import permutations
+
+    perm = permutations([1, 2, 3])
+    print(type(perm))  # <class 'itertools.permutations'>
+    print(next(perm))  # (1, 2, 3)
+    ```
+- 예시
+    ```
+    # 예시 1: 전체 순열
+
+    from itertools import permutations
+
+    data = [1, 2, 3]
+    result = list(permutations(data))
+
+    print(result)
+    # 출력: [(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)]
+    # 3! = 6개의 순열이 생성
+
+    # 예시 2: 부분 순열 (r 지정)
+
+    from itertools import permutations
+
+    data = ['A', 'B', 'C']
+    result = list(permutations(data, 2))
+
+    print(result)
+    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
+    # 3P2 = 6개의 순열 생성
+    # 2개씩 뽑되 순서를 고려함
+
+    # 문자열에서도 사용 가능
+
+    from itertools import permutations
+
+    word = "abc"
+    result = list(permutations(word))
+
+    print(result)
+    # 출력: [('a', 'b', 'c'), ('a', 'c', 'b'), ('b', 'a', 'c'), ...]
+    # 반환된 각 튜플을 문자열로 합치고 싶다면:
+    [''.join(p) for p in permutations(word)]
+    # 출력: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+    ```
+    - 중복 제거를 원하면 set()으로 감쌀 수 있음
+
 <br>
 
 ---
