@@ -893,6 +893,31 @@
     # 하지만 combinations() 자체는 중복된 조합을 의도적으로 생성하지는 않음
     ```
 
+## 곱집합 (Cartesian Product)
+- 두 개 이상의 집합의 모든 가능한 순서쌍(또는 순서튜플)을 만든 것
+    - 마치 중첩된 for문처럼 작동
+- 원소를 중복해서 사용 가능
+- 순서를 중요하게 여김 (즉, (A, B) ≠ (B, A))
+- 기본 구조
+    ```
+    from itertools import product
+
+    itertools.product(*iterables, repeat=1)
+    ```
+    - *iterables: 반복 가능한 객체들
+    - repeat: 곱집합을 자기 자신과 몇 번 반복할지 지정 (기본값 1)
+- 반환값
+    - 튜플들의 반복자(iterator) 반환
+- 예시
+    ```
+    rom itertools import product
+
+    result = list(product('AB', repeat=2))
+    print(result)
+    # 출력: [('A', 'A'), ('A', 'B'), ('B', 'A'), ('B', 'B')]
+    # 'A'와 'B' 중 2개를 중복해서 골라, 가능한 모든 순열을 생성
+    ```
+
 <br>
 
 ---
