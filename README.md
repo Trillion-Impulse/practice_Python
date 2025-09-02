@@ -920,6 +920,41 @@
     # 'A'와 'B' 중 2개를 중복해서 골라, 가능한 모든 순열을 생성
     ```
 
+## 중복 조합
+- 주어진 요소들 중에서 중복을 허용하면서 순서 없이 r개를 선택
+- 순서는 상관없고, 중복은 가능
+- 기본 구조
+    ```
+    from itertools import combinations_with_replacement
+
+    itertools.combinations_with_replacement(iterable, r)
+    ```
+    - iterable: 조합의 대상 (리스트, 문자열 등)
+    - r: 선택할 항목 개수
+- 반환값
+    - 중복을 허용하는 조합들을 생성하는 이터레이터(iterator)
+    - 중복 허용, 순서 비중 없음, 사전순(정렬된) 결과를 반환
+- 예시
+    ```
+    mport itertools
+
+    data = ['A', 'B', 'C']
+    r = 2
+
+    result = itertools.combinations_with_replacement(data, r)
+
+    for item in result:
+        print(item)
+    
+    # 출력
+    ('A', 'A')
+    ('A', 'B')
+    ('A', 'C')
+    ('B', 'B')
+    ('B', 'C')
+    ('C', 'C')
+    ```
+
 <br>
 
 ---
