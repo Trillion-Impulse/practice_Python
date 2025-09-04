@@ -973,6 +973,50 @@
 
 # 메서드
 
+## 리스트 메서드
+
+### sort()
+- 리스트의 원본 자체를 정렬하며, 새 리스트를 반환하지 않음
+- 기본 구조
+    ```
+    list.sort(key=None, reverse=False)
+    ```
+    - key: 정렬 기준이 되는 함수를 지정 (len, str.lower 등)
+    - reverse: 기본값은 False (오름차순), True일 경우 내림차순
+- 반환값
+    - 리턴값은 None
+    - 리스트를 제자리(in-place)에서 정렬하므로, 정렬된 결과가 원본 리스트에 적용
+    - 리스트 자체를 정렬하며, 리턴값이 없는 메서드
+- 예시
+    ```
+    # 기본 오름차순 정렬
+    numbers = [5, 2, 9, 1]
+    numbers.sort()
+    print(numbers)  # [1, 2, 5, 9]
+
+    # 내림차순 정렬
+    numbers = [5, 2, 9, 1]
+    numbers.sort(reverse=True)
+    print(numbers)  # [9, 5, 2, 1]
+
+    # key 인자 사용 — 문자열 길이 기준 정렬
+    words = ["banana", "apple", "kiwi"]
+    words.sort(key=len)
+    print(words)  # ['kiwi', 'apple', 'banana']
+
+    # key 인자 사용 — 대소문자 무시하고 정렬
+    words = ["Banana", "apple", "Cherry"]
+    words.sort(key=str.lower)
+    print(words)  # ['apple', 'Banana', 'Cherry']
+
+    # 주의: 반환값은 None
+    my_list = [3, 1, 2]
+    result = my_list.sort()
+
+    print(result)  # None ← 반환값 없음
+    print(my_list) # [1, 2, 3] ← 원본이 정렬됨
+    ```
+
 ## 문자열 메서드
 
 ### split()
