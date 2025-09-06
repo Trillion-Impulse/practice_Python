@@ -985,6 +985,55 @@
     ('C', 'C')
     ```
 
+## next()
+- 이터레이터(iterator)에서 다음 값을 하나씩 꺼내는 함수
+- 보통 for 루프 내부에서 자동으로 사용
+- 수동으로 반복을 제어할 때 유용
+- 기본 구조
+    ```
+    next(iterator[, default])
+    ```
+    - iterator: 다음 값을 꺼낼 이터레이터 객체
+    - default(선택): 더 이상 꺼낼 값이 없을 때 반환할 기본값. 없으면 StopIteration 예외 발생
+- 반환값
+    - 이터레이터의 다음 값을 반환
+    - 만약 더 이상 꺼낼 값이 없으면:
+        - default 인자가 있으면 → 기본값 반환
+        - default 인자가 없으면 → StopIteration 예외 발생
+- 예시
+    ```
+    # 예제 1: 기본 사용
+    numbers = [1, 2, 3]
+    it = iter(numbers)  # 리스트를 이터레이터로 변환
+
+    print(next(it))  # 1
+    print(next(it))  # 2
+    print(next(it))  # 3
+    # print(next(it))  # 오류 발생: StopIteration
+
+    # 예제 2: default 값 사용
+    numbers = [1, 2]
+    it = iter(numbers)
+
+    print(next(it, '끝'))  # 1
+    print(next(it, '끝'))  # 2
+    print(next(it, '끝'))  # '끝' (이터레이터 끝나서 기본값 반환)
+
+    # 예제 3: 반복문 없이 이터레이터 직접 처리
+    text = "Hi"
+    it = iter(text)
+
+    while True:
+        try:
+            char = next(it)
+            print(char)
+        except StopIteration:
+            break
+    # 출력: 
+    # H
+    # i
+    ```
+
 <br>
 
 ---
