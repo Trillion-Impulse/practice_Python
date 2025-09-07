@@ -2128,6 +2128,38 @@
         - sum(...)으로 그룹 단어인 개수만 셈
         - 파이썬에서는 True와 False도 숫자로 취급
 
+9. 문제 9
+    ```
+    # 잘 동작
+    r = []
+    next(o := open(0))
+    for i in o:
+        r.append(tuple(map(int, i.split())))
+    r.sort()
+    for i, j in r:
+        print(i, j)
+    
+    # 시간 초과
+    r = []
+    N, *l = map(int, open(0).read().split())
+    while l:
+        i, j, *l = l
+        r.append((i, j))
+    r.sort()
+    for i, j in r[1:]:
+        print(i, j)
+    ```
+    - `i, j, *l = l`이 부분이 핵심 병목
+        - `*l = l[2:]`는 리스트 슬라이싱을 매번 수행
+        - 리스트 슬라이싱은 O(n) 시간복잡도가 듬
+        - 따라서 전체 반복에서 시간 복잡도는 O(n^2)가 됨
+            - 리스트 슬라이싱 O(n)을 while로 n/2번 반복
+    - 첫 번째 코드는 왜 빠른가?
+        - 파일을 한 줄씩 순회하면서 처리
+        - 입력 전체를 메모리에 올리지도 않고, 슬라이싱도 안 함
+            - for의 in에 open(0)을 넣어서 파일을 한 줄씩 처리
+        - O(n)으로 동작함 → 빠름
+    - 슬라이싱 대신 인덱스 접근 혹은 컴프리헨션을 사용하면 시간초과 문제 해결
 <br>
 
 ---
