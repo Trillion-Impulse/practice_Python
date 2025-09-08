@@ -20,6 +20,17 @@
         - 기본값: `sys.stdout`
     - flush: 출력 버퍼를 강제로 비울지 여부 (True면 바로 출력됨 — 로그 등에서 유용)
         - 기본값: False
+- 참고
+    - 문자열 내부에 있는 \n (newline)은 출력될 때 실제 줄바꿈을 발생시킴
+        ```
+        lines = ['a\n', 'b\n', 'c\n']
+        print(*lines, sep='')
+
+        # 출력
+        a
+        b
+        c
+        ```
 
 <br>
 
