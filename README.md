@@ -318,6 +318,42 @@
 
 ## 논리 연산자
 
+### and
+- 두 값이 모두 참일 때만 전체를 참(True)으로 만드는 논리 연산자
+- 기본 개념
+    ```
+    A and B
+    ```
+    - A가 거짓이면, 그 값을 바로 반환하고 **B는 평가하지 않음**
+        - 이것을 단축 평가 (short-circuit evaluation)라고 함
+            - 논리 연산을 수행할 때, 결과가 이미 결정된 경우 남은 연산을 생략하는 것
+            - 필요한 만큼만 계산하고, 나머지는 건너뛴다는 뜻
+            - 오류 방지 가능
+                ```
+                user = get_user() and get_user().name
+                # user가 None이면 user.name을 평가하지 않아서 AttributeError를 막을 수 있음
+                ```
+            - 성능 향상: 불필요한 계산을 자동으로 생략해서 속도가 빨라짐
+    - A가 참이면, **B를 평가해서 그 값을 반환**함
+- 예시
+    ```
+    True and True     # True
+    True and False    # False
+    False and True    # False
+    0 and 5          # 결과: 0      (0은 False → 바로 반환)
+    3 and 5          # 결과: 5      (3은 True → 5 반환)
+    '' and 'hi'      # 결과: ''     (빈 문자열은 False)
+    'hi' and 'hello' # 결과: 'hello' (둘 다 True → 마지막 값 반환)
+
+    # 두 조건이 모두 참이어야 할 때
+    if is_admin and is_active:
+        print("관리자 접근 허용")
+    
+    # 값이 존재할 때 다음 동작 수행
+    user = get_user() and get_user().name
+    # user가 None이면 user.name을 평가하지 않아서 AttributeError를 막을 수 있음
+    ```
+
 ### or
 - 둘 중 하나라도 참이면 전체 결과를 참(True) 으로 만드는 역할
 - 기본 개념
