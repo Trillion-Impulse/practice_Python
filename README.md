@@ -141,6 +141,48 @@
 
 <br>
 
+# 제너레이터 표현식
+- 파이썬에서 이터레이터(iterator)를 만들기 위한 간결하고 메모리 효율적인 방법
+- 기본 구조
+    ```
+    (expression for item in iterable if condition)
+    ```
+    - expression: 반복할 때 계산할 값
+    - item: 반복 변수
+    - iterable: 반복 가능한 객체 (리스트, 튜플, range 등)
+    - condition (선택): 조건을 만족하는 경우만 처리
+- 반환값
+    - generator 객체 (이터레이터의 일종)를 반환
+    - 값을 하나씩 "지연 평가(lazy evaluation)"로 생성
+    - 메모리 사용량이 매우 적음
+- 예시
+    ```
+    # 제너레이터 표현식 만들기
+    gen = (x * 2 for x in range(5))
+    print(next(gen))  # 0
+    print(next(gen))  # 2
+    print(next(gen))  # 4
+    # 한 번에 하나씩 값이 생성됨 (0, 2, 4, ...)
+
+    # sum()과 함께 사용 (합계 구하기)
+    total = sum(x for x in range(100) if x % 2 == 0)
+    print(total)  # 2450
+
+    # any() / all()과 함께 조건 검사
+    any(x > 10 for x in [3, 7, 12])  # True
+    all(x < 5 for x in [1, 2, 3])    # True
+
+    # tuple(), set(), list() 등과 함께 변환
+    tuple(x**2 for x in range(3))  # (0, 1, 4)
+    set(x % 2 for x in range(5))   # {0, 1}
+    list(x for x in 'abc')         # ['a', 'b', 'c']
+    ```
+- 주의
+    - 이터레이터로써 for, next(), in 등에서 사용 가능
+    - 한 번 사용하면 다시 사용할 수 없음, 다시 만들어서 사용
+    - 메모리 효율적: 큰 데이터 처리에 유리 (전체 리스트를 만들지 않음)
+    - 지연 평가: 실제 값은 꺼낼 때 계산됨 (next() 호출 시)
+
 # 리스트 컴프리헨션
 - 파이썬에서 리스트를 간결하고 빠르게 만드는 문법
 - 언제 사용하는가
