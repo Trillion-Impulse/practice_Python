@@ -1186,6 +1186,54 @@
     # i
     ```
 
+## dict()
+- 딕셔너리(dictionary)를 만드는 내장 함수
+    - 딕셔너리는 key–value 쌍을 저장하는 자료구조
+- 기본 구조
+    ```
+    dict([iterable_or_mapping], **kwargs)
+    ```
+    - iterable_or_mapping (선택):
+        - (key, value) 쌍의 이터러블
+        - 또는 딕셔너리 형태의 매핑 객체
+    - **kwargs (선택):
+        - 키워드 인자 형태의 key=value 쌍
+- 반환값
+    - 새로 만든 딕셔너리 객체(dict)를 반환
+- 예시
+    ```
+    # 빈 딕셔너리 만들기
+    d = dict()
+    print(d)
+    # 출력: {}   # 빈 딕셔너리
+
+    # 튜플 리스트로 만들기 (iterable 인자)
+    d = dict([('a', 1), ('b', 2)])
+    print(d)
+    # 출력: {'a': 1, 'b': 2}
+
+    # 다른 딕셔너리로부터 생성 (mapping 인자)
+    d = dict({'x': 10, 'y': 20})
+    print(d)
+    # 출력: {'x': 10, 'y': 20}
+
+    # 키워드 인자 사용 (**kwargs)
+    d = dict(name='Alice', age=30)
+    print(d)
+    # 출력: {'name': 'Alice', 'age': 30}
+    # 문자열 키일 때만 사용 가능, 변수명 규칙 따라야 함
+
+    # zip()과 함께 사용
+    keys = ['a', 'b', 'c']
+    values = [1, 2, 3]
+    d = dict(zip(keys, values))
+    print(d)
+    # 출력: {'a': 1, 'b': 2, 'c': 3}
+    ```
+- 주의
+    - 키는 해시 가능(hashable) 해야 함 → 숫자, 문자열, 튜플(불변) 등
+    - (key, value) 형식이 잘못되면 오류 발생
+
 <br>
 
 ---
