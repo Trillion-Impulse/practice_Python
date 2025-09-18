@@ -1344,6 +1344,72 @@
     - 키는 해시 가능(hashable) 해야 함 → 숫자, 문자열, 튜플(불변) 등
     - (key, value) 형식이 잘못되면 오류 발생
 
+## Counter()
+- 파이썬 표준 라이브러리의 `collections 모듈`에 포함된 데이터 계수기
+- 반복 가능한(iterable) 객체에서 요소의 개수를 셀 때 유용한 클래스
+- 내부적으로는 딕셔너리처럼 작동하지만 값은 항상 정수로 요소의 개수를 나타냄
+- dict를 확장해서 빈도수 계산에 특화된 기능들을 추가한 클래스
+- 기본 구조
+    ```
+    from collections import Counter
+
+    Counter(iterable_or_mapping)
+    ```
+    - iterable_or_mapping: 문자열, 리스트, 튜플 같은 반복 가능한 객체(iterable) 또는 딕셔너리 형식(mapping)
+- 반환값
+    - 각 요소의 등장 횟수(빈도수) 를 세어 딕셔너리 형태로 반환
+    - Counter 객체는 딕셔너리처럼 생겼으며, 각 요소를 키(key)로 하고 그 빈도(횟수)를 값(value)으로 가짐
+    - 내부적으로는 dict를 상속한 클래스이지만, 값을 자동으로 정수로 관리
+    - 존재하지 않는 키에 접근하면 자동으로 0을 반환
+- 예시
+    ```
+    # 예제 1: 문자열에서 문자 개수 세기
+    from collections import Counter
+
+    text = "hello world"
+    counter = Counter(text)
+    print(counter)
+    #출력: Counter({'l': 3, 'o': 2, 'h': 1, 'e': 1, ' ': 1, 'w': 1, 'r': 1, 'd': 1})
+
+    # 예제 2: 리스트에서 항목 빈도수 세기
+    fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple']
+    fruit_count = Counter(fruits)
+    print(fruit_count)
+    #출력: Counter({'apple': 3, 'banana': 2, 'orange': 1})
+
+    # 예제 3: 가장 많이 등장한 요소 추출
+    print(fruit_count.most_common(2))
+    #출력: [('apple', 3), ('banana', 2)]
+
+    # 예제 4: 요소 합치기 / 빼기
+    a = Counter(['a', 'b', 'a', 'c'])
+    b = Counter(['a', 'b', 'b', 'd'])
+
+    print(a + b)     # 합치기
+    print(a - b)     # 빼기
+    #출력:
+    Counter({'a': 3, 'b': 2, 'c': 1, 'd': 1})
+    Counter({'a': 1, 'c': 1})
+    ```
+- 사용 가능한 주요 메서드
+    - 실제로 dict의 서브클래스이므로 대부분의 딕셔너리 메서드를 사용 가능
+    - 요약 표
+        | 메서드                       | 설명                  |              |
+        | ------------------------- | ------------------- | ------------ |
+        | `elements()`              | 개수만큼 요소 반복          |              |
+        | `most_common([n])`        | 가장 흔한 요소 반환         |              |
+        | `subtract()`              | 다른 Counter에서 개수 감산  |              |
+        | `update()`                | 다른 Counter에서 개수 가산  |              |
+        | `clear()`                 | 모든 항목 제거            |              |
+        | `copy()`                  | 얕은 복사본 반환           |              |
+        | `total()`                 | 전체 개수 합계 반환 (3.10+) |              |
+        | 산술 연산자 (`+`, `-`, `&`, \` | \`)                 | 요소별 빈도 계산 수행 |
+    - dict와 공통된 메서드
+        - update(), clear(), copy() 등 기본적인 컬렉션 메서드
+    - Counter만의 고유 메서드 및 기능
+        - elements(), most_common(), subtract(), total()
+        - 산술 연산자 (+, -, &, |)
+
 <br>
 
 ---
