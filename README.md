@@ -1410,6 +1410,29 @@
         - elements(), most_common(), subtract(), total()
         - 산술 연산자 (+, -, &, |)
 
+## gcd()
+- 최대공약수 (GCD: Greatest Common Divisor)
+- 기본 구조
+    ```
+    import math
+
+    math.gcd(a, b)
+    ```
+    - 매개변수: a, b는 정수 (음수도 가능)
+        - 음수는 절댓값 기준
+- 반환값
+    - a와 b의 최대공약수(GCD)를 정수로 반환
+- 예시
+    ```
+    import math
+
+    print(math.gcd(12, 18))  # 출력: 6
+    print(math.gcd(-12, 18)) # 출력: 6 (음수여도 절댓값 기준)
+    print(math.gcd(17, 5))   # 출력: 1 (서로소)
+    ```    
+- Python 버전
+    - math.gcd()는 Python 3.5 이상에서 사용 가능
+
 <br>
 
 ---
