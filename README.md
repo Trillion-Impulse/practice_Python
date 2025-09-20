@@ -1433,6 +1433,38 @@
 - Python 버전
     - math.gcd()는 Python 3.5 이상에서 사용 가능
 
+## lcm()
+- 최소공배수 (LCM: Least Common Multiple)
+- 기본 구조
+    ```
+    import math
+
+    math.lcm(a, b, ...)
+    ```
+    - 매개변수: a, b, ...은 최소공배수를 구할 두 개 이상의 정수
+- 반환값
+    - 입력된 모든 수의 최소공배수
+    - lcm(a, b)에서 하나라도 0이면 결과는 0
+    - math.lcm()은 내부적으로 math.gcd()를 사용
+        ```
+        예를 들어 직접 lcm()을 만들면,
+        import math
+
+        def lcm(a, b):
+        return abs(a * b) // math.gcd(a, b)
+        ```
+- 예시
+    ```
+    import math
+
+    print(math.lcm(6, 8))         # 출력: 24
+    print(math.lcm(4, 6, 8))      # 출력: 24
+    print(math.lcm(3, 5, 7))      # 출력: 105
+    print(math.lcm(10, 0))        # 출력: 0
+    ```
+- Python 버전
+    - math.lcm은 Python 3.9 이상에서만 사용 가능
+
 <br>
 
 ---
