@@ -318,6 +318,64 @@
 - else는 조건이 아니라 루프 종료 방식에 따라 실행됨
 - break의 실행 유무가 else 실행의 키
 
+# match case 문
+- 패턴 매칭(Pattern Matching) 문법
+- 기본 구조
+    ```
+    match 값:
+        case 패턴1:
+            실행문1
+        case 패턴2:
+            실행문2
+        case _:
+            기본 실행문 (default와 유사)
+    ```
+    - `case _`
+        - 기본값 또는 else 역할
+        - 어떤 패턴도 일치하지 않을 때 실행
+- 예시
+    ```
+    # 정수 비교
+    x = 2
+    match x:
+        case 1:
+            print("1입니다.")
+        case 2:
+            print("2입니다.")
+        case _:
+            print("다른 숫자입니다.")
+    
+    # 튜플 매칭
+    point = (0, 5)
+    match point:
+        case (0, y):
+            print(f"y축 위의 점, y={y}")
+        case (x, 0):
+            print(f"x축 위의 점, x={x}")
+        case (x, y):
+            print(f"일반 좌표: ({x}, {y})")
+    
+    # 리스트 구조 매칭
+    items = [1, 2, 3]
+    match items:
+        case [1, 2, 3]:
+            print("정확히 1, 2, 3")
+        case [1, *rest]:
+            print(f"1로 시작하며 나머지는 {rest}")
+        case _:
+            print("일치하는 패턴 없음")
+    
+    # 딕셔너리 매칭 (부분 지원)
+        - 일부 키만 지정해도 매칭 가능
+    data = {"type": "user", "id": 42}
+    match data:
+        case {"type": "user", "id": id}:
+            print(f"유저 ID는 {id}")
+        case _:
+            print("알 수 없는 데이터")
+    ```
+- Python 3.10 이상에서 사용 가능
+
 <br>
 
 ---
