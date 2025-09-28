@@ -301,7 +301,11 @@
 
 <br>
 
-# for else 문
+# 흐름 제어문
+
+## 반복문
+
+### for else 문
 - 기본 구조
     ```
     for 변수 in 반복가능한객체:
@@ -318,7 +322,9 @@
 - else는 조건이 아니라 루프 종료 방식에 따라 실행됨
 - break의 실행 유무가 else 실행의 키
 
-# match case 문
+## 패턴 매칭
+
+### match case 문
 - 패턴 매칭(Pattern Matching) 문법
 - 기본 구조
     ```
