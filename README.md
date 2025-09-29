@@ -382,6 +382,42 @@
     ```
 - Python 3.10 이상에서 사용 가능
 
+## 예외 처리
+
+### try except 문
+- 프로그램 실행 중 발생할 수 있는 오류(예외)를 처리하기 위한 구문
+- 기본 구조
+    ```
+    try:
+    # 예외 발생 가능 코드
+    except 예외종류:
+        # 예외 처리
+    else:
+        # 예외가 없을 때 실행
+    finally:
+        # 무조건 실행 (예외 발생 여부와 무관)
+    ```
+    - try: 예외가 발생할 수 있는 코드
+    - except: 예외 발생 시 실행할 코드
+    - else: 예외가 없을 때 실행할 코드 (선택)
+    - finally: 무조건 실행되는 코드 (선택)
+- 예시
+    ```
+    # 0으로 나누기 예외 처리
+
+    try:
+        num = int(input("숫자를 입력하세요: "))
+        print("100을", num, "으로 나누면:", 100 / num)
+    except ValueError:
+        print("숫자가 아닙니다!")
+    except ZeroDivisionError:
+        print("0으로는 나눌 수 없습니다!")
+    else:
+        print("정상적으로 계산되었습니다.")
+    finally:
+        print("프로그램 종료.")
+    ```
+
 <br>
 
 ---
