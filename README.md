@@ -1665,6 +1665,35 @@
 - Python 버전
     - math.lcm은 Python 3.9 이상에서만 사용 가능
 
+## deque()
+- "double-ended queue"의 줄임말
+- 양쪽 끝에서 데이터를 추가(append, appendleft)하거나 제거(pop, popleft) 가능
+- 기본 구조
+    ```
+    from collections import deque
+
+    q=deque()
+    ```
+    - deque()는 비어 있는 덱(큐)을 생성
+    - list와 비슷하지만, 양쪽 끝 삽입/삭제가 빠름
+    - list처럼 초기값을 넣어 생성 가능
+        ```
+        q = deque([10, 20, 30])
+        print(q)  # deque([10, 20, 30])
+
+        q = deque("abc")
+        print(q)  # deque(['a', 'b', 'c'])
+        ```
+- 반환값
+    - 반환되는 객체는 collections.deque 클래스의 인스턴스
+    - deque()는 빈 덱(큐)을 생성
+        ```
+        from collections import deque
+        q = deque()
+        print(q)    # 출력: deque([])
+        print(type(q))  # 출력: <class 'collections.deque'>
+        ```
+
 <br>
 
 ---
