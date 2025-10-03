@@ -2185,6 +2185,37 @@
     print(lst.index(20))  # 출력: 1
     ```
 
+## deque 메서드
+
+### rotate()
+- deque의 요소들을 회전(순환 이동) 시킴
+    - 오른쪽 회전: 마지막 요소가 맨 앞으로 이동
+    - 왼쪽 회전: 첫 번째 요소가 맨 뒤로 이동
+- 기본 구조
+    ```
+    deque.rotate(n=1)
+    ```
+    - n: 정수 (기본값 = 1)
+        - n > 0: 오른쪽으로 n칸 회전
+        - n < 0: 왼쪽으로 n칸 회전
+- 반환값
+    - 반환값 없음 (None)
+    - deque 자체를 제자리에서(in-place) 수정
+- 예시
+    ```
+    from collections import deque
+
+    dq = deque([1, 2, 3, 4, 5])
+
+    # 오른쪽으로 2칸 회전
+    dq.rotate(2)
+    print(dq)  # deque([4, 5, 1, 2, 3])
+
+    # 왼쪽으로 3칸 회전
+    dq.rotate(-3)
+    print(dq)  # deque([2, 3, 4, 5, 1])
+    ```
+
 <br>
 
 ---
