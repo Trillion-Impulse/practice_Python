@@ -1693,6 +1693,21 @@
         print(q)    # 출력: deque([])
         print(type(q))  # 출력: <class 'collections.deque'>
         ```
+- deque와 list는 비교 불가능
+    ```
+    from collections import deque
+
+    q = deque([1])
+    print('10'[q > []])  # TypeError 발생
+
+    # [q>[]]를 사용하고 싶다면 deque를 리스트로 변경 후 비교
+    q = deque([1])
+    print('10'[list(q) > []])  # 출력: '0'
+
+    # 혹은 not을 사용
+    q = deque([1])
+    print('01'[not q])  # 정상 작동, 출력: '0'
+    ```
 
 <br>
 
