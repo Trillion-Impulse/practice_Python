@@ -2251,6 +2251,26 @@
     print(dq)  # 출력: deque([5, 10, 20, 30])
     ```
 
+### extendleft()
+- iterable(반복 가능한 객체)의 요소들을 왼쪽(앞쪽) 끝에 역순으로 하나씩 추가하는 메서드
+- 기본 구조
+    ```
+    deque.extendleft(iterable)
+    ```
+    - 각 요소가 왼쪽에 역순으로 추가됨
+- 반환값
+    - 반환값은 None
+    - deque를 직접 수정
+- 예시
+    ```
+    from collections import deque
+
+    dq = deque([10, 20])
+    dq.extendleft([1, 2, 3])
+
+    print(dq)  # 출력: deque([3, 2, 1, 10, 20])
+    ```
+
 <br>
 
 ---
