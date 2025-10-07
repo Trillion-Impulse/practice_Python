@@ -2231,6 +2231,26 @@
     print(dq)  # deque([2, 3, 4, 5, 1])
     ```
 
+### appendleft()
+- deque의 왼쪽(앞쪽) 끝에 요소를 추가하는 메서드
+- list.append()가 오른쪽 끝에 요소를 추가하는 것과 달리, deque.appendleft()는 왼쪽에 빠르게 삽입
+- 기본 구조
+    ```
+    deque.appendleft(x)
+    ```
+    - x: 왼쪽에 추가할 요소
+- 반환값
+    - 반환값은 None
+- 예시
+    ```
+    from collections import deque
+
+    dq = deque([10, 20, 30])
+    dq.appendleft(5)
+
+    print(dq)  # 출력: deque([5, 10, 20, 30])
+    ```
+
 <br>
 
 ---
