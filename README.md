@@ -2271,6 +2271,33 @@
     print(dq)  # 출력: deque([3, 2, 1, 10, 20])
     ```
 
+### popleft()
+- deque에서 맨 앞 요소를 제거하고 제거된 값을 반환
+- 일반적인 리스트보다 빠른 성능으로 앞쪽 요소를 제거
+- 기본 구조
+    ```
+    from collections import deque
+
+    dq = deque([...])
+    dq.popleft()
+    ```
+- 반환값
+    - 제거된 왼쪽 첫 번째 요소를 반환
+    - 만약 deque가 비어 있으면 IndexError 예외를 발생
+- 예시
+    ```
+    from collections import deque
+
+    # deque 생성
+    dq = deque([10, 20, 30, 40])
+
+    # 앞쪽 요소 제거
+    value = dq.popleft()
+
+    print("제거된 값:", value)      # 출력: 제거된 값: 10
+    print("현재 deque 상태:", dq)  # 출력: 현재 deque 상태: deque([20, 30, 40])
+    ```
+
 <br>
 
 ---
