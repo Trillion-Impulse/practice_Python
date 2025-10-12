@@ -1727,18 +1727,20 @@
     ```
     from collections import deque
 
-    q=deque()
+    q=deque(iterable=(), maxlen=None)
     ```
     - deque()는 비어 있는 덱(큐)을 생성
     - list와 비슷하지만, 양쪽 끝 삽입/삭제가 빠름
-    - list처럼 초기값을 넣어 생성 가능
-        ```
-        q = deque([10, 20, 30])
-        print(q)  # deque([10, 20, 30])
+    - iterable : 초기값 (리스트, 튜플 등)
+        - list처럼 초기값을 넣어 생성 가능
+            ```
+            q = deque([10, 20, 30])
+            print(q)  # deque([10, 20, 30])
 
-        q = deque("abc")
-        print(q)  # deque(['a', 'b', 'c'])
-        ```
+            q = deque("abc")
+            print(q)  # deque(['a', 'b', 'c'])
+            ```
+    - maxlen : 최대 길이 (정수), 기본값은 None → 무제한
 - 반환값
     - 반환되는 객체는 collections.deque 클래스의 인스턴스
     - deque()는 빈 덱(큐)을 생성
@@ -1748,6 +1750,20 @@
         print(q)    # 출력: deque([])
         print(type(q))  # 출력: <class 'collections.deque'>
         ```
+    - maxlen을 사용할 경우
+        - 제한 길이를 가진 deque 객체
+            ```
+            from collections import deque
+
+            dq = deque(maxlen=3)
+            dq.append(1)
+            dq.append(2)
+            dq.append(3)
+            print(dq)  # deque([1, 2, 3], maxlen=3)
+
+            dq.append(4)  # 가장 왼쪽의 1이 자동 제거됨
+            print(dq)     # deque([2, 3, 4], maxlen=3)
+            ```
 - deque와 list는 비교 불가능
     ```
     from collections import deque
