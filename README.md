@@ -1817,6 +1817,33 @@
     print(round(3.5))  # 출력: 4
     ```
 
+## numpy 패키지
+
+### mean()
+- 배열 또는 리스트의 산술 평균을 계산
+- 기본 구조
+    ```
+    import numpy as np
+
+    np.mean(a, axis=None, dtype=None, out=None, keepdims=False)
+    ```
+    - a: 평균을 구할 대상 (리스트, 배열 등)
+    - axis: 평균을 계산할 축 (다차원 배열에서 사용)
+    - dtype: 계산 시 사용할 데이터 타입
+    - out: 결과를 저장할 배열 (잘 안 씀)
+    - keepdims: 차원 유지 여부 (True면 차원 수 유지)
+- 반환값
+    - 평균값 (기본: float64)
+- 예시
+    ```
+    import numpy as np
+
+    data = [[1, 2, 3], [4, 5, 6]]
+    np.mean(data)               # 전체 평균 → 3.5
+    np.mean(data, axis=0)       # 열 평균 → [2.5 3.5 4.5]
+    np.mean(data, axis=1)       # 행 평균 → [2.0 5.0]
+    ```
+
 <br>
 
 ---
