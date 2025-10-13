@@ -1844,6 +1844,27 @@
     np.mean(data, axis=1)       # 행 평균 → [2.0 5.0]
     ```
 
+### median()
+- 데이터의 중앙값을 반환
+- 기본 구조
+    ```
+    import numpy as np
+
+    np.median(a, axis=None, out=None, overwrite_input=False, keepdims=False)
+    ```
+    - a: 입력 데이터
+    - axis: 축 지정
+    - out: 결과를 저장할 배열 (잘 안 씀)
+    - overwrite_input: 메모리 절약을 위해 원본 데이터를 수정할지 여부
+    - keepdims: 차원 유지 여부
+- 반환값
+    - 중위수 값 (float 또는 int)
+- 예시
+    ```
+    data = [1, 3, 2, 4]
+    np.median(data)  # 출력: 2.5
+    ```
+
 <br>
 
 ---
