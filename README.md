@@ -1123,31 +1123,6 @@
             3 cherry
     ```
 
-## multimode()
-- 주어진 리스트(혹은 문자열 등)에서 **최빈값(가장 자주 나오는 값)**을 리스트로 반환해주는 함수
-- statistics 모듈에 포함된 함수
-    - `from statistics import multimode` 해야함
-- 파이썬 3.8 이상부터 사용 가능
-- 기본 구조
-    ```
-    from statistics import multimode
-
-    data = [1, 2, 2, 3, 3, 4]
-    print(multimode(data))  # [2, 3]
-    ```
-    - data: iterable (반복 가능한 자료형)
-        - 최빈값을 구할 대상 데이터. 문자열, 리스트, 튜플 등 반복 가능한 객체
-- 반환값
-    - data에서 가장 자주 등장한 값들을 **리스트**로 묶어 반환
-    - 여러 값이 최빈값이라면 모두 포함
-    - 단 하나의 최빈값만 있다면, 그것 하나만 리스트로
-- 예시
-    ```
-    multimode(['a', 'b', 'b', 'c'])  # ['b']
-    multimode([1, 1, 2, 2, 3])  # [1, 2]
-    multimode(['x', 'y', 'z'])  # ['x', 'y', 'z']
-    ```
-
 ## re.sub()
 - 문자열 내에서 정규 표현식 패턴과 매칭되는 부분을 다른 문자열로 교체(replace)하는 함수
 - 파이썬의 정규 표현식(Regular Expression) 모듈인 `re`에서 제공하는 함수
@@ -1815,6 +1790,38 @@
     # 반올림 규칙 (짝수 쪽으로 반올림, Bankers’ Rounding)
     print(round(2.5))  # 출력: 2
     print(round(3.5))  # 출력: 4
+    ```
+
+## statistics 모듈
+- 파이썬 표준 라이브러리에 포함된 통계 계산용 모듈
+- 평균(mean), 중앙값(median), 최빈값(mode), 분산(variance), 표준편차(stdev) 등 기본적인 통계 함수를 제공
+- 추가 설치 없이 바로 사용 가능
+    - `import statistics`
+    - `from statistics import *`
+
+### multimode()
+- 주어진 리스트(혹은 문자열 등)에서 **최빈값(가장 자주 나오는 값)**을 리스트로 반환해주는 함수
+- statistics 모듈에 포함된 함수
+    - `from statistics import multimode` 해야함
+- 파이썬 3.8 이상부터 사용 가능
+- 기본 구조
+    ```
+    from statistics import multimode
+
+    data = [1, 2, 2, 3, 3, 4]
+    print(multimode(data))  # [2, 3]
+    ```
+    - data: iterable (반복 가능한 자료형)
+        - 최빈값을 구할 대상 데이터. 문자열, 리스트, 튜플 등 반복 가능한 객체
+- 반환값
+    - data에서 가장 자주 등장한 값들을 **리스트**로 묶어 반환
+    - 여러 값이 최빈값이라면 모두 포함
+    - 단 하나의 최빈값만 있다면, 그것 하나만 리스트로
+- 예시
+    ```
+    multimode(['a', 'b', 'b', 'c'])  # ['b']
+    multimode([1, 1, 2, 2, 3])  # [1, 2]
+    multimode(['x', 'y', 'z'])  # ['x', 'y', 'z']
     ```
 
 ## numpy 패키지
