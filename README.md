@@ -1865,6 +1865,26 @@
     np.median(data)  # 출력: 2.5
     ```
 
+### ptp()
+- 데이터의 최댓값 - 최솟값을 계산하여 범위(range)를 반환
+- 기본 구조
+    ```
+    import numpy as np
+
+    np.ptp(a, axis=None, out=None, keepdims=False)
+    ```
+    - a: 입력 배열
+    - axis: 계산할 축
+    - out: 결과를 저장할 배열 (잘 안 씀)
+    - keepdims: 차원 유지 여부
+- 반환값
+    - 범위 값 (숫자)
+- 예시
+    ```
+    data = [1, 5, 9]
+    np.ptp(data)  # 출력: 8 (9 - 1)
+    ```
+
 <br>
 
 ---
