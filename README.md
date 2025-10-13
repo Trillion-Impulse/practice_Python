@@ -1780,6 +1780,43 @@
     print('01'[not q])  # 정상 작동, 출력: '0'
     ```
 
+## round()
+- 숫자를 지정된 소수점 이하 자리수로 반올림
+- 기본 구조
+    ```
+    round(number, ndigits)
+    ```
+    - number	반올림할 숫자 (필수)
+    - ndigits	소수점 이하 자릿수 (생략 가능, 기본값: None)
+        - ndigits 생략 시 → 정수로 반올림
+        - ndigits > 0 → 소수점 이하 n자리까지 반올림
+        - ndigits < 0 → 10, 100, 1000 단위로 반올림
+- 반환값
+    - 반올림된 숫자를 반환
+- 반올림 규칙
+    - 소수점 아래가 정확히 .5일 때, 짝수 쪽으로 반올림, Bankers’ Rounding
+    - 강제로 항상 올림/내림하고 싶다면?
+        - 올림: math.ceil()
+        - 내림: math.floor()
+        - 무조건 5 이상 올림: decimal 모듈 사용 가능
+- 예시
+    ```
+    # 소수점 첫째 자리까지 반올림
+    print(round(3.14159, 1))  # 출력: 3.1
+
+    # 정수로 반올림
+    print(round(3.7))   # 출력: 4
+    print(round(3.3))   # 출력: 3
+
+    # 음수 자리에서 반올림
+    print(round(1234, -1))   # 출력: 1230
+    print(round(1234, -2))   # 출력: 1200
+
+    # 반올림 규칙 (짝수 쪽으로 반올림, Bankers’ Rounding)
+    print(round(2.5))  # 출력: 2
+    print(round(3.5))  # 출력: 4
+    ```
+
 <br>
 
 ---
