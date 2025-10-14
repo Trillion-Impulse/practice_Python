@@ -2687,6 +2687,62 @@
 
 <br>
 
+# 가상환경 (Virtual Environment)
+- 가상환경은 Python 프로젝트 간의 라이브러리 충돌을 방지하기 위한 격리된 실행 환경
+- 가상환경은 Python 프로젝트마다 독립적인 패키지/라이브러리 공간을 만들어주는 도구
+- 여러 Python 프로젝트를 동시에 진행할 때, 서로 다른 라이브러리 버전이 필요한 경우가 존재
+- 만약 시스템 전체(Python 전역)에 설치하면 버전 충돌 등 문제가 발생 가능
+- 따라서 각 프로젝트마다 고유한 Python 실행 환경을 만들기 위해 가상환경을 사용
+- 명령어
+    ```
+    python -m venv venv
+    ```
+    - python: 현재 설치된 파이썬 실행
+    - -m venv: venv 모듈 실행 (Python에 기본 포함됨)
+    - venv: 가상환경을 만들 폴더 이름 (보통 venv 또는 .venv)
+- 실행 결과
+    - 현재 폴더에 venv/라는 디렉터리가 생김.
+    - 그 안에 독립적인 Python, pip, site-packages가 있음.
+    - 여기에만 라이브러리를 설치하면 됨 (pip install flask 등)
+- 가상환경 사용 방법
+    ```
+    # 가상환경 만들기
+    python -m venv venv
+
+    # 가상환경 활성화
+    Windows:	venv\Scripts\activate
+    Mac/Linux:	source venv/bin/activate
+
+    # 가상환경 비활성화
+    deactivate
+    ```
+- 실전 사용 예 (Flask 프로젝트 시작할 때)
+    ```
+    # 1. 프로젝트 폴더 생성
+    mkdir flask-project
+    cd flask-project
+
+    # 2. 가상환경 만들기
+    python -m venv venv
+
+    # 3. 가상환경 활성화
+    source venv/bin/activate   # Mac/Linux
+    # 또는 venv\Scripts\activate  # Windows
+
+    # 4. Flask 설치
+    pip install flask
+
+    # 5. 코드 작성 후 실행
+    python app.py
+    ```
+- 가상환경 활성화된 경우 보통 터미널 명령어 줄 앞에 `(venv)`가 붙어 있음
+
+<br>
+
+---
+
+<br>
+
 # jinja2 문법
 - Jinja2는 Python에서 널리 사용되는 템플릿 엔진
 - Flask, Django 등 웹 프레임워크에서도 자주 사용
