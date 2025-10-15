@@ -1573,7 +1573,104 @@
     - 키는 해시 가능(hashable) 해야 함 → 숫자, 문자열, 튜플(불변) 등
     - (key, value) 형식이 잘못되면 오류 발생
 
-## Counter()
+## gcd()
+- 최대공약수 (GCD: Greatest Common Divisor)
+- 기본 구조
+    ```
+    import math
+
+    math.gcd(a, b)
+    ```
+    - 매개변수: a, b는 정수 (음수도 가능)
+        - 음수는 절댓값 기준
+    - **a, b, ... : Python 3.9부터 세 개 이상의 인자를 사용 가능**
+- 반환값
+    - a와 b의 최대공약수(GCD)를 정수로 반환
+- 예시
+    ```
+    import math
+
+    print(math.gcd(12, 18))  # 출력: 6
+    print(math.gcd(-12, 18)) # 출력: 6 (음수여도 절댓값 기준)
+    print(math.gcd(17, 5))   # 출력: 1 (서로소)
+    ```    
+- Python 버전
+    - math.gcd()는 Python 3.5 이상에서 사용 가능
+
+## lcm()
+- 최소공배수 (LCM: Least Common Multiple)
+- 기본 구조
+    ```
+    import math
+
+    math.lcm(a, b, ...)
+    ```
+    - 매개변수: a, b, ...은 최소공배수를 구할 두 개 이상의 정수
+- 반환값
+    - 입력된 모든 수의 최소공배수
+    - lcm(a, b)에서 하나라도 0이면 결과는 0
+    - math.lcm()은 내부적으로 math.gcd()를 사용
+        ```
+        예를 들어 직접 lcm()을 만들면,
+        import math
+
+        def lcm(a, b):
+        return abs(a * b) // math.gcd(a, b)
+        ```
+- 예시
+    ```
+    import math
+
+    print(math.lcm(6, 8))         # 출력: 24
+    print(math.lcm(4, 6, 8))      # 출력: 24
+    print(math.lcm(3, 5, 7))      # 출력: 105
+    print(math.lcm(10, 0))        # 출력: 0
+    ```
+- Python 버전
+    - math.lcm은 Python 3.9 이상에서만 사용 가능
+
+## round()
+- 숫자를 지정된 소수점 이하 자리수로 반올림
+- 기본 구조
+    ```
+    round(number, ndigits)
+    ```
+    - number	반올림할 숫자 (필수)
+    - ndigits	소수점 이하 자릿수 (생략 가능, 기본값: None)
+        - ndigits 생략 시 → 정수로 반올림
+        - ndigits > 0 → 소수점 이하 n자리까지 반올림
+        - ndigits < 0 → 10, 100, 1000 단위로 반올림
+- 반환값
+    - 반올림된 숫자를 반환
+- 반올림 규칙
+    - 소수점 아래가 정확히 .5일 때, 짝수 쪽으로 반올림, Bankers’ Rounding
+    - 강제로 항상 올림/내림하고 싶다면?
+        - 올림: math.ceil()
+        - 내림: math.floor()
+        - 무조건 5 이상 올림: decimal 모듈 사용 가능
+- 예시
+    ```
+    # 소수점 첫째 자리까지 반올림
+    print(round(3.14159, 1))  # 출력: 3.1
+
+    # 정수로 반올림
+    print(round(3.7))   # 출력: 4
+    print(round(3.3))   # 출력: 3
+
+    # 음수 자리에서 반올림
+    print(round(1234, -1))   # 출력: 1230
+    print(round(1234, -2))   # 출력: 1200
+
+    # 반올림 규칙 (짝수 쪽으로 반올림, Bankers’ Rounding)
+    print(round(2.5))  # 출력: 2
+    print(round(3.5))  # 출력: 4
+    ```
+
+## collections 모듈
+- 고급 데이터 구조를 제공하여 기본적인 리스트, 튜플, 딕셔너리보다 더 다양한 방식으로 데이터를 다룰 수 있도록 해줌
+- 파이썬 표준 라이브러리의 모듈 중 하나
+
+### Counter()
 - 파이썬 표준 라이브러리의 `collections 모듈`에 포함된 데이터 계수기
 - 반복 가능한(iterable) 객체에서 요소의 개수를 셀 때 유용한 클래스
 - 내부적으로는 딕셔너리처럼 작동하지만 값은 항상 정수로 요소의 개수를 나타냄
@@ -1639,63 +1736,7 @@
         - elements(), most_common(), subtract(), total()
         - 산술 연산자 (+, -, &, |)
 
-## gcd()
-- 최대공약수 (GCD: Greatest Common Divisor)
-- 기본 구조
-    ```
-    import math
-
-    math.gcd(a, b)
-    ```
-    - 매개변수: a, b는 정수 (음수도 가능)
-        - 음수는 절댓값 기준
-    - **a, b, ... : Python 3.9부터 세 개 이상의 인자를 사용 가능**
-- 반환값
-    - a와 b의 최대공약수(GCD)를 정수로 반환
-- 예시
-    ```
-    import math
-
-    print(math.gcd(12, 18))  # 출력: 6
-    print(math.gcd(-12, 18)) # 출력: 6 (음수여도 절댓값 기준)
-    print(math.gcd(17, 5))   # 출력: 1 (서로소)
-    ```    
-- Python 버전
-    - math.gcd()는 Python 3.5 이상에서 사용 가능
-
-## lcm()
-- 최소공배수 (LCM: Least Common Multiple)
-- 기본 구조
-    ```
-    import math
-
-    math.lcm(a, b, ...)
-    ```
-    - 매개변수: a, b, ...은 최소공배수를 구할 두 개 이상의 정수
-- 반환값
-    - 입력된 모든 수의 최소공배수
-    - lcm(a, b)에서 하나라도 0이면 결과는 0
-    - math.lcm()은 내부적으로 math.gcd()를 사용
-        ```
-        예를 들어 직접 lcm()을 만들면,
-        import math
-
-        def lcm(a, b):
-        return abs(a * b) // math.gcd(a, b)
-        ```
-- 예시
-    ```
-    import math
-
-    print(math.lcm(6, 8))         # 출력: 24
-    print(math.lcm(4, 6, 8))      # 출력: 24
-    print(math.lcm(3, 5, 7))      # 출력: 105
-    print(math.lcm(10, 0))        # 출력: 0
-    ```
-- Python 버전
-    - math.lcm은 Python 3.9 이상에서만 사용 가능
-
-## deque()
+### deque()
 - "double-ended queue"의 줄임말
 - 양쪽 끝에서 데이터를 추가(append, appendleft)하거나 제거(pop, popleft) 가능
 - 기본 구조
@@ -1753,43 +1794,6 @@
     # 혹은 not을 사용
     q = deque([1])
     print('01'[not q])  # 정상 작동, 출력: '0'
-    ```
-
-## round()
-- 숫자를 지정된 소수점 이하 자리수로 반올림
-- 기본 구조
-    ```
-    round(number, ndigits)
-    ```
-    - number	반올림할 숫자 (필수)
-    - ndigits	소수점 이하 자릿수 (생략 가능, 기본값: None)
-        - ndigits 생략 시 → 정수로 반올림
-        - ndigits > 0 → 소수점 이하 n자리까지 반올림
-        - ndigits < 0 → 10, 100, 1000 단위로 반올림
-- 반환값
-    - 반올림된 숫자를 반환
-- 반올림 규칙
-    - 소수점 아래가 정확히 .5일 때, 짝수 쪽으로 반올림, Bankers’ Rounding
-    - 강제로 항상 올림/내림하고 싶다면?
-        - 올림: math.ceil()
-        - 내림: math.floor()
-        - 무조건 5 이상 올림: decimal 모듈 사용 가능
-- 예시
-    ```
-    # 소수점 첫째 자리까지 반올림
-    print(round(3.14159, 1))  # 출력: 3.1
-
-    # 정수로 반올림
-    print(round(3.7))   # 출력: 4
-    print(round(3.3))   # 출력: 3
-
-    # 음수 자리에서 반올림
-    print(round(1234, -1))   # 출력: 1230
-    print(round(1234, -2))   # 출력: 1200
-
-    # 반올림 규칙 (짝수 쪽으로 반올림, Bankers’ Rounding)
-    print(round(2.5))  # 출력: 2
-    print(round(3.5))  # 출력: 4
     ```
 
 ## statistics 모듈
