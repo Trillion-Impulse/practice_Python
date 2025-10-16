@@ -1123,32 +1123,6 @@
             3 cherry
     ```
 
-## re.sub()
-- 문자열 내에서 정규 표현식 패턴과 매칭되는 부분을 다른 문자열로 교체(replace)하는 함수
-- 파이썬의 정규 표현식(Regular Expression) 모듈인 `re`에서 제공하는 함수
-- `replace()`와의 비교
-    - `replace()`가 단순 문자열 치환이라면, `re.sub()`는 복잡한 패턴 매칭을 지원하는 치환
-- 기본 구조
-    ```
-    import re
-    re.sub(pattern, repl, string, count=0, flags=0)
-    ```
-    - pattern: 정규 표현식 패턴 (찾고자 하는 문자열 규칙)
-    - repl: 대체할 문자열 또는 함수
-    - string: 검색 및 치환할 원본 문자열
-    - count: 치환할 최대 횟수 (기본 0은 모두 치환)
-    - flags: 정규식 옵션 (대소문자 무시 등)
-- 반환값
-    - string에서 pattern에 매칭되는 부분을 repl로 교체한 새 문자열을 반환
-- 예시
-    ```
-    import re
-
-    text = "apple 123 banana 456"
-    result = re.sub(r"\d+", "#", text)  # 숫자 부분을 '#'으로 대체
-    print(result)  # "apple # banana #"
-    ```
-
 ## sum()
 - 반복 가능한(iterable) 객체의 항목들을 왼쪽부터 오른쪽으로 합산하여 총합을 반환하는 내장 함수
 - 기본 구조
@@ -1664,6 +1638,37 @@
     # 반올림 규칙 (짝수 쪽으로 반올림, Bankers’ Rounding)
     print(round(2.5))  # 출력: 2
     print(round(3.5))  # 출력: 4
+    ```
+
+## re 모듈
+- 정규 표현식(Regular Expression)을 다루기 위한 파이썬 표준 라이브러리의 모듈 중 하나
+    - 정규 표현식은 문자열에서 **특정한 규칙(패턴)**을 찾거나 가공할 수 있게 해주는 도구
+    - 이메일 주소, 전화번호, 우편번호처럼 **형식이 일정한 문자열**을 검출할 때 유용
+
+### re.sub()
+- 문자열 내에서 정규 표현식 패턴과 매칭되는 부분을 다른 문자열로 교체(replace)하는 함수
+- 파이썬의 정규 표현식(Regular Expression) 모듈인 `re`에서 제공하는 함수
+- `replace()`와의 비교
+    - `replace()`가 단순 문자열 치환이라면, `re.sub()`는 복잡한 패턴 매칭을 지원하는 치환
+- 기본 구조
+    ```
+    import re
+    re.sub(pattern, repl, string, count=0, flags=0)
+    ```
+    - pattern: 정규 표현식 패턴 (찾고자 하는 문자열 규칙)
+    - repl: 대체할 문자열 또는 함수
+    - string: 검색 및 치환할 원본 문자열
+    - count: 치환할 최대 횟수 (기본 0은 모두 치환)
+    - flags: 정규식 옵션 (대소문자 무시 등)
+- 반환값
+    - string에서 pattern에 매칭되는 부분을 repl로 교체한 새 문자열을 반환
+- 예시
+    ```
+    import re
+
+    text = "apple 123 banana 456"
+    result = re.sub(r"\d+", "#", text)  # 숫자 부분을 '#'으로 대체
+    print(result)  # "apple # banana #"
     ```
 
 ## collections 모듈
