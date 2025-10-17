@@ -1285,30 +1285,6 @@
     ```
     - 중복 제거를 원하면 set()으로 감쌀 수 있음
 
-## perm()
-- n개 중에서 k개를 골라 순서 있게 나열하는 경우의 수를 계산
-- 순열의 개수를 계산
-- 기본 구조
-    ```
-    math.perm(n, k)
-    ```
-    - n: 전체 원소 개수
-    - k: 선택할 원소 개수 (순서 중요)
-        - k 생략 시 k = n으로 간주 → n! 반환
-- 반환값
-    - 정수 (int)
-    - 순열의 개수
-- 예시
-    ```
-    import math
-
-    # 5개 중 3개를 순서 있게 고르는 경우의 수
-    print(math.perm(5, 3))  # 출력: 60
-
-    # 5개 모두를 순서 있게 나열하는 경우 (5!)
-    print(math.perm(5))     # 출력: 120
-    ```
-
 ## combinations()
 - 조합을 구할 때 사용하는 함수
     - 조합: 주어진 항목들 중에서 일부를 선택하는 경우의 수, 선택한 순서는 고려하지 않음
@@ -1364,29 +1340,6 @@
     # 출력: [(1, 1), (1, 2), (1, 2)]
     # 입력에 중복이 있으면 결과에도 중복된 조합이 나올 수 있음
     # 하지만 combinations() 자체는 중복된 조합을 의도적으로 생성하지는 않음
-    ```
-
-## comb()
-- n개 중에서 k개를 골라 순서 없이 나열하는 경우의 수를 계산
-- 조합의 개수를 계산
-- 기본 구조
-    ```
-    math.comb(n, k)
-    ```
-    - n: 전체 원소 개수
-    - k: 선택할 원소 개수 (순서 무관)
-- 반환값
-    - 정수 (int)
-    - 조합의 개수
-- 예시
-    ```
-    import math
-
-    # 5개 중 3개를 순서 없이 고르는 경우의 수
-    print(math.comb(5, 3))  # 출력: 10
-
-    # 5개 중 0개를 고르는 경우 (항상 1개 — 아무것도 안 고르는 경우)
-    print(math.comb(5, 0))  # 출력: 1
     ```
 
 ## 곱집합 (Cartesian Product)
@@ -1546,62 +1499,6 @@
 - 주의
     - 키는 해시 가능(hashable) 해야 함 → 숫자, 문자열, 튜플(불변) 등
     - (key, value) 형식이 잘못되면 오류 발생
-
-## gcd()
-- 최대공약수 (GCD: Greatest Common Divisor)
-- 기본 구조
-    ```
-    import math
-
-    math.gcd(a, b)
-    ```
-    - 매개변수: a, b는 정수 (음수도 가능)
-        - 음수는 절댓값 기준
-    - **a, b, ... : Python 3.9부터 세 개 이상의 인자를 사용 가능**
-- 반환값
-    - a와 b의 최대공약수(GCD)를 정수로 반환
-- 예시
-    ```
-    import math
-
-    print(math.gcd(12, 18))  # 출력: 6
-    print(math.gcd(-12, 18)) # 출력: 6 (음수여도 절댓값 기준)
-    print(math.gcd(17, 5))   # 출력: 1 (서로소)
-    ```    
-- Python 버전
-    - math.gcd()는 Python 3.5 이상에서 사용 가능
-
-## lcm()
-- 최소공배수 (LCM: Least Common Multiple)
-- 기본 구조
-    ```
-    import math
-
-    math.lcm(a, b, ...)
-    ```
-    - 매개변수: a, b, ...은 최소공배수를 구할 두 개 이상의 정수
-- 반환값
-    - 입력된 모든 수의 최소공배수
-    - lcm(a, b)에서 하나라도 0이면 결과는 0
-    - math.lcm()은 내부적으로 math.gcd()를 사용
-        ```
-        예를 들어 직접 lcm()을 만들면,
-        import math
-
-        def lcm(a, b):
-        return abs(a * b) // math.gcd(a, b)
-        ```
-- 예시
-    ```
-    import math
-
-    print(math.lcm(6, 8))         # 출력: 24
-    print(math.lcm(4, 6, 8))      # 출력: 24
-    print(math.lcm(3, 5, 7))      # 출력: 105
-    print(math.lcm(10, 0))        # 출력: 0
-    ```
-- Python 버전
-    - math.lcm은 Python 3.9 이상에서만 사용 가능
 
 ## round()
 - 숫자를 지정된 소수점 이하 자리수로 반올림
@@ -1832,6 +1729,112 @@
     multimode([1, 1, 2, 2, 3])  # [1, 2]
     multimode(['x', 'y', 'z'])  # ['x', 'y', 'z']
     ```
+
+## math 모듈
+- 파이썬의 표준 라이브러리에 포함된 수학 관련 함수들을 제공하는 표준 모듈
+
+### perm()
+- n개 중에서 k개를 골라 순서 있게 나열하는 경우의 수를 계산
+- 순열의 개수를 계산
+- 기본 구조
+    ```
+    math.perm(n, k)
+    ```
+    - n: 전체 원소 개수
+    - k: 선택할 원소 개수 (순서 중요)
+        - k 생략 시 k = n으로 간주 → n! 반환
+- 반환값
+    - 정수 (int)
+    - 순열의 개수
+- 예시
+    ```
+    import math
+
+    # 5개 중 3개를 순서 있게 고르는 경우의 수
+    print(math.perm(5, 3))  # 출력: 60
+
+    # 5개 모두를 순서 있게 나열하는 경우 (5!)
+    print(math.perm(5))     # 출력: 120
+    ```
+
+### comb()
+- n개 중에서 k개를 골라 순서 없이 나열하는 경우의 수를 계산
+- 조합의 개수를 계산
+- 기본 구조
+    ```
+    math.comb(n, k)
+    ```
+    - n: 전체 원소 개수
+    - k: 선택할 원소 개수 (순서 무관)
+- 반환값
+    - 정수 (int)
+    - 조합의 개수
+- 예시
+    ```
+    import math
+
+    # 5개 중 3개를 순서 없이 고르는 경우의 수
+    print(math.comb(5, 3))  # 출력: 10
+
+    # 5개 중 0개를 고르는 경우 (항상 1개 — 아무것도 안 고르는 경우)
+    print(math.comb(5, 0))  # 출력: 1
+    ```
+
+### gcd()
+- 최대공약수 (GCD: Greatest Common Divisor)
+- 기본 구조
+    ```
+    import math
+
+    math.gcd(a, b)
+    ```
+    - 매개변수: a, b는 정수 (음수도 가능)
+        - 음수는 절댓값 기준
+    - **a, b, ... : Python 3.9부터 세 개 이상의 인자를 사용 가능**
+- 반환값
+    - a와 b의 최대공약수(GCD)를 정수로 반환
+- 예시
+    ```
+    import math
+
+    print(math.gcd(12, 18))  # 출력: 6
+    print(math.gcd(-12, 18)) # 출력: 6 (음수여도 절댓값 기준)
+    print(math.gcd(17, 5))   # 출력: 1 (서로소)
+    ```    
+- Python 버전
+    - math.gcd()는 Python 3.5 이상에서 사용 가능
+
+### lcm()
+- 최소공배수 (LCM: Least Common Multiple)
+- 기본 구조
+    ```
+    import math
+
+    math.lcm(a, b, ...)
+    ```
+    - 매개변수: a, b, ...은 최소공배수를 구할 두 개 이상의 정수
+- 반환값
+    - 입력된 모든 수의 최소공배수
+    - lcm(a, b)에서 하나라도 0이면 결과는 0
+    - math.lcm()은 내부적으로 math.gcd()를 사용
+        ```
+        예를 들어 직접 lcm()을 만들면,
+        import math
+
+        def lcm(a, b):
+        return abs(a * b) // math.gcd(a, b)
+        ```
+- 예시
+    ```
+    import math
+
+    print(math.lcm(6, 8))         # 출력: 24
+    print(math.lcm(4, 6, 8))      # 출력: 24
+    print(math.lcm(3, 5, 7))      # 출력: 105
+    print(math.lcm(10, 0))        # 출력: 0
+    ```
+- Python 버전
+    - math.lcm은 Python 3.9 이상에서만 사용 가능
 
 ## numpy 패키지
 
