@@ -935,6 +935,39 @@
     ```
     - expression_string: 파이썬 코드가 들어있는 문자열
     - 실행 결과는 별도의 반환값이 없고, 그냥 코드가 실행되는 것
+    - expresstion_string을 ',",''' 등으로 감싸야 함
+- 반환값
+    - None
+- 예시
+    ```
+    # 기본 예시
+    code = """
+    for i in range(3):
+        print("Hello", i)
+    """
+
+    exec(code)
+
+    # 출력
+    Hello 0
+    Hello 1
+    Hello 2
+
+    # 숏코딩을 위한 예시
+    i=int(input())
+    s='-'
+    exec("s+=' '*len(s)+s;"*int(i))
+    print(s)
+
+    # 위의 exec식을 풀어쓰면
+    exec("""
+    s+=' '*len(s)+s
+    s+=' '*len(s)+s
+    ...
+    s+=' '*len(s)+s
+    s+=' '*len(s)+s
+    """) # s+=' '*len(s)+s 를 int(i)개의 줄 만큼 나열 한 결과를 exex로 실행
+    ```
 - 숏코딩처럼 짧게 쓰고 싶을 때 사용
 - 보안과 가독성에 주의
 
