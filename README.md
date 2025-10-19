@@ -1270,6 +1270,7 @@
 - 반환값
     - 반환값은 **이터레이터(iterator)**
     - 각 순열은 튜플(tuple) 형태로 반환
+    - 각 순열은 iterable의 순서 그대로 오름차순 정렬됨
     - 반복문 또는 list()로 변환하여 사용 가능
     ```
     from itertools import permutations
