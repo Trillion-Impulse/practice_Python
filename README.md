@@ -1419,7 +1419,7 @@
     - 중복 허용, 순서 비중 없음, 사전순(정렬된) 결과를 반환
 - 예시
     ```
-    mport itertools
+    import itertools
 
     data = ['A', 'B', 'C']
     r = 2
