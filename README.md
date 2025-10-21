@@ -1438,6 +1438,35 @@
     ('C', 'C')
     ```
 
+## starmap()
+- 반복 가능한 자료형에 함수를 인자 여러 개로 분리해 적용할 때 사용
+- starmap은 map과 비슷하지만, 인자를 튜플을 풀어서(*args) 함수에 넘긴다는 점에서 차이가 존재
+- 기본 구조
+    ```
+    from itertools import starmap
+
+    itertools.starmap(function, iterable_of_args)
+    ```
+    - function: 호출할 함수
+    - iterable_of_args: 각각이 튜플(혹은 리스트)인 이터러블. 각 튜플은 function의 인자가 됨
+- 반환값
+    - function(*args)의 결과들을 순서대로 생성하는 이터레이터
+- 예시
+    ```
+    # 기본 사용
+    from itertools import starmap
+
+    def add(a, b):
+        return a + b
+
+    args = [(1, 2), (3, 4), (5, 6)]
+
+    result = starmap(add, args)
+
+    print(list(result))  # [3, 7, 11]
+    # 각 튜플 (a, b)가 add(a, b)로 호출됨
+    ```
+
 ## next()
 - 이터레이터(iterator)에서 다음 값을 하나씩 꺼내는 함수
 - 보통 for 루프 내부에서 자동으로 사용
