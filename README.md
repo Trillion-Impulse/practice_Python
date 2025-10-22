@@ -1251,222 +1251,6 @@
     # → False (3은 홀수라서)
     ```
 
-## permutations()
-- 순열을 구할 때 사용하는 함수
-    - 순열: 주어진 항목들 중에서 일부 또는 전부를 선택해서 순서를 고려하여 나열한 것
-        - 전체 순열: n개의 원소 → n!
-        - 부분 순열: n개 중 r개를 고름 → nPr = n! / (n - r)!
-- itertools 모듈에 포함
-- 기본 구조
-    ```
-    from itertools import permutations
-
-    itertools.permutations(iterable, r=None)
-    ```
-    - iterable: 반복 가능한 객체 (예: 리스트, 문자열, 튜플 등)
-    - r (선택): 순열을 구성할 원소 개수, 생략하면 기본값은 len(iterable) — 즉, 전체 순열을 생성함
-        - r을 지정하면, iterable에서 r개를 선택해 만들 수 있는 모든 순열이 생성됨
-        - 순열이므로 순서가 다르면 다른 결과로 간주됨
-- 반환값
-    - 반환값은 **이터레이터(iterator)**
-    - 각 순열은 튜플(tuple) 형태로 반환
-    - 각 순열은 iterable의 순서 그대로 오름차순 정렬됨
-    - 반복문 또는 list()로 변환하여 사용 가능
-    ```
-    from itertools import permutations
-
-    perm = permutations([1, 2, 3])
-    print(type(perm))  # <class 'itertools.permutations'>
-    print(next(perm))  # (1, 2, 3)
-    ```
-- 예시
-    ```
-    # 예시 1: 전체 순열
-
-    from itertools import permutations
-
-    data = [1, 2, 3]
-    result = list(permutations(data))
-
-    print(result)
-    # 출력: [(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)]
-    # 3! = 6개의 순열이 생성
-
-    # 예시 2: 부분 순열 (r 지정)
-
-    from itertools import permutations
-
-    data = ['A', 'B', 'C']
-    result = list(permutations(data, 2))
-
-    print(result)
-    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
-    # 3P2 = 6개의 순열 생성
-    # 2개씩 뽑되 순서를 고려함
-
-    # 문자열에서도 사용 가능
-
-    from itertools import permutations
-
-    word = "abc"
-    result = list(permutations(word))
-
-    print(result)
-    # 출력: [('a', 'b', 'c'), ('a', 'c', 'b'), ('b', 'a', 'c'), ...]
-    # 반환된 각 튜플을 문자열로 합치고 싶다면:
-    [''.join(p) for p in permutations(word)]
-    # 출력: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
-    ```
-    - 중복 제거를 원하면 set()으로 감쌀 수 있음
-
-## combinations()
-- 조합을 구할 때 사용하는 함수
-    - 조합: 주어진 항목들 중에서 일부를 선택하는 경우의 수, 선택한 순서는 고려하지 않음
-        - "A와 B를 뽑는 것"과 "B와 A를 뽑는 것"은 같은 조합
-    - nCr = n! / (r! × (n - r)!)
-- 기본 구조
-    ```
-    from itertools import combinations
-
-    itertools.combinations(iterable, r)
-    ```
-    - iterable: 리스트, 튜플, 문자열 등 반복 가능한 객체
-    - r (필수): 조합을 구성할 원소의 개수 (반드시 지정해야 함)
-- 반환값
-    - 조합의 튜플을 담은 이터레이터(iterator)를 반환
-    - 각 조합은 정렬된 원소의 튜플로 표현
-    - 각 조합은 입력 iterable의 순서를 기준으로 생성되며, 그 순서에 따른 사전식 순으로 반환
-    - 순서를 고려하지 않기 때문에 (A, B)와 (B, A)는 하나만 포함됨
-- 예시
-    ```
-    # 예시 1: 숫자 리스트에서 조합
-
-    from itertools import combinations
-
-    data = [1, 2, 3]
-    result = list(combinations(data, 2))
-
-    print(result)
-    # 출력: [(1, 2), (1, 3), (2, 3)]
-    # 3개의 원소 중 2개를 뽑는 모든 조합을 반환
-    # 3C2 = 3가지 조합
-
-    # 예시 2: 문자열에서 조합
-
-    from itertools import combinations
-
-    word = "ABC"
-    result = list(combinations(word, 2))
-
-    print(result)
-    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'C')]
-    # 문자열도 iterable이므로 조합 생성 가능
-    # 문자열로 합치고 싶다면:
-    [''.join(p) for p in combinations(word, 2)]
-    # 출력: ['AB', 'AC', 'BC']
-
-    # 예시 3: 중복된 원소가 있을 때
-
-    from itertools import combinations
-
-    data = [1, 1, 2]
-    result = list(combinations(data, 2))
-    print(result)
-    # 출력: [(1, 1), (1, 2), (1, 2)]
-    # 입력에 중복이 있으면 결과에도 중복된 조합이 나올 수 있음
-    # 하지만 combinations() 자체는 중복된 조합을 의도적으로 생성하지는 않음
-    ```
-
-## 곱집합 (Cartesian Product)
-- 두 개 이상의 집합의 모든 가능한 순서쌍(또는 순서튜플)을 만든 것
-    - 마치 중첩된 for문처럼 작동
-    - 중복 순열의 개념과 동일
-- 원소를 중복해서 사용 가능
-- 순서를 중요하게 여김 (즉, (A, B) ≠ (B, A))
-- 기본 구조
-    ```
-    from itertools import product
-
-    itertools.product(*iterables, repeat=1)
-    ```
-    - *iterables: 반복 가능한 객체들
-    - repeat: 곱집합을 자기 자신과 몇 번 반복할지 지정 (기본값 1)
-- 반환값
-    - 튜플들의 반복자(iterator) 반환
-- 예시
-    ```
-    rom itertools import product
-
-    result = list(product('AB', repeat=2))
-    print(result)
-    # 출력: [('A', 'A'), ('A', 'B'), ('B', 'A'), ('B', 'B')]
-    # 'A'와 'B' 중 2개를 중복해서 골라, 가능한 모든 순열을 생성
-    ```
-
-## 중복 조합
-- 주어진 요소들 중에서 중복을 허용하면서 순서 없이 r개를 선택
-- 순서는 상관없고, 중복은 가능
-- 기본 구조
-    ```
-    from itertools import combinations_with_replacement
-
-    itertools.combinations_with_replacement(iterable, r)
-    ```
-    - iterable: 조합의 대상 (리스트, 문자열 등)
-    - r: 선택할 항목 개수
-- 반환값
-    - 중복을 허용하는 조합들을 생성하는 이터레이터(iterator)
-    - 중복 허용, 순서 비중 없음, 사전순(정렬된) 결과를 반환
-- 예시
-    ```
-    import itertools
-
-    data = ['A', 'B', 'C']
-    r = 2
-
-    result = itertools.combinations_with_replacement(data, r)
-
-    for item in result:
-        print(item)
-    
-    # 출력
-    ('A', 'A')
-    ('A', 'B')
-    ('A', 'C')
-    ('B', 'B')
-    ('B', 'C')
-    ('C', 'C')
-    ```
-
-## starmap()
-- 반복 가능한 자료형에 함수를 인자 여러 개로 분리해 적용할 때 사용
-- starmap은 map과 비슷하지만, 인자를 튜플을 풀어서(*args) 함수에 넘긴다는 점에서 차이가 존재
-- 기본 구조
-    ```
-    from itertools import starmap
-
-    itertools.starmap(function, iterable_of_args)
-    ```
-    - function: 호출할 함수
-    - iterable_of_args: 각각이 튜플(혹은 리스트)인 이터러블. 각 튜플은 function의 인자가 됨
-- 반환값
-    - function(*args)의 결과들을 순서대로 생성하는 이터레이터
-- 예시
-    ```
-    # 기본 사용
-    from itertools import starmap
-
-    def add(a, b):
-        return a + b
-
-    args = [(1, 2), (3, 4), (5, 6)]
-
-    result = starmap(add, args)
-
-    print(list(result))  # [3, 7, 11]
-    # 각 튜플 (a, b)가 add(a, b)로 호출됨
-    ```
-
 ## next()
 - 이터레이터(iterator)에서 다음 값을 하나씩 꺼내는 함수
 - 보통 for 루프 내부에서 자동으로 사용
@@ -1899,6 +1683,225 @@
     ```
 - Python 버전
     - math.lcm은 Python 3.9 이상에서만 사용 가능
+
+## itertools 모듈
+- 파이썬의 표준 라이브러리에 포함되어 반복(iteration) 작업을 더 빠르고, 메모리 효율적으로 처리할 수 있게 해주는 모듈
+
+### permutations()
+- 순열을 구할 때 사용하는 함수
+    - 순열: 주어진 항목들 중에서 일부 또는 전부를 선택해서 순서를 고려하여 나열한 것
+        - 전체 순열: n개의 원소 → n!
+        - 부분 순열: n개 중 r개를 고름 → nPr = n! / (n - r)!
+- itertools 모듈에 포함
+- 기본 구조
+    ```
+    from itertools import permutations
+
+    itertools.permutations(iterable, r=None)
+    ```
+    - iterable: 반복 가능한 객체 (예: 리스트, 문자열, 튜플 등)
+    - r (선택): 순열을 구성할 원소 개수, 생략하면 기본값은 len(iterable) — 즉, 전체 순열을 생성함
+        - r을 지정하면, iterable에서 r개를 선택해 만들 수 있는 모든 순열이 생성됨
+        - 순열이므로 순서가 다르면 다른 결과로 간주됨
+- 반환값
+    - 반환값은 **이터레이터(iterator)**
+    - 각 순열은 튜플(tuple) 형태로 반환
+    - 각 순열은 iterable의 순서 그대로 오름차순 정렬됨
+    - 반복문 또는 list()로 변환하여 사용 가능
+    ```
+    from itertools import permutations
+
+    perm = permutations([1, 2, 3])
+    print(type(perm))  # <class 'itertools.permutations'>
+    print(next(perm))  # (1, 2, 3)
+    ```
+- 예시
+    ```
+    # 예시 1: 전체 순열
+
+    from itertools import permutations
+
+    data = [1, 2, 3]
+    result = list(permutations(data))
+
+    print(result)
+    # 출력: [(1, 2, 3), (1, 3, 2), (2, 1, 3), (2, 3, 1), (3, 1, 2), (3, 2, 1)]
+    # 3! = 6개의 순열이 생성
+
+    # 예시 2: 부분 순열 (r 지정)
+
+    from itertools import permutations
+
+    data = ['A', 'B', 'C']
+    result = list(permutations(data, 2))
+
+    print(result)
+    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('C', 'A'), ('C', 'B')]
+    # 3P2 = 6개의 순열 생성
+    # 2개씩 뽑되 순서를 고려함
+
+    # 문자열에서도 사용 가능
+
+    from itertools import permutations
+
+    word = "abc"
+    result = list(permutations(word))
+
+    print(result)
+    # 출력: [('a', 'b', 'c'), ('a', 'c', 'b'), ('b', 'a', 'c'), ...]
+    # 반환된 각 튜플을 문자열로 합치고 싶다면:
+    [''.join(p) for p in permutations(word)]
+    # 출력: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+    ```
+    - 중복 제거를 원하면 set()으로 감쌀 수 있음
+
+### combinations()
+- 조합을 구할 때 사용하는 함수
+    - 조합: 주어진 항목들 중에서 일부를 선택하는 경우의 수, 선택한 순서는 고려하지 않음
+        - "A와 B를 뽑는 것"과 "B와 A를 뽑는 것"은 같은 조합
+    - nCr = n! / (r! × (n - r)!)
+- 기본 구조
+    ```
+    from itertools import combinations
+
+    itertools.combinations(iterable, r)
+    ```
+    - iterable: 리스트, 튜플, 문자열 등 반복 가능한 객체
+    - r (필수): 조합을 구성할 원소의 개수 (반드시 지정해야 함)
+- 반환값
+    - 조합의 튜플을 담은 이터레이터(iterator)를 반환
+    - 각 조합은 정렬된 원소의 튜플로 표현
+    - 각 조합은 입력 iterable의 순서를 기준으로 생성되며, 그 순서에 따른 사전식 순으로 반환
+    - 순서를 고려하지 않기 때문에 (A, B)와 (B, A)는 하나만 포함됨
+- 예시
+    ```
+    # 예시 1: 숫자 리스트에서 조합
+
+    from itertools import combinations
+
+    data = [1, 2, 3]
+    result = list(combinations(data, 2))
+
+    print(result)
+    # 출력: [(1, 2), (1, 3), (2, 3)]
+    # 3개의 원소 중 2개를 뽑는 모든 조합을 반환
+    # 3C2 = 3가지 조합
+
+    # 예시 2: 문자열에서 조합
+
+    from itertools import combinations
+
+    word = "ABC"
+    result = list(combinations(word, 2))
+
+    print(result)
+    # 출력: [('A', 'B'), ('A', 'C'), ('B', 'C')]
+    # 문자열도 iterable이므로 조합 생성 가능
+    # 문자열로 합치고 싶다면:
+    [''.join(p) for p in combinations(word, 2)]
+    # 출력: ['AB', 'AC', 'BC']
+
+    # 예시 3: 중복된 원소가 있을 때
+
+    from itertools import combinations
+
+    data = [1, 1, 2]
+    result = list(combinations(data, 2))
+    print(result)
+    # 출력: [(1, 1), (1, 2), (1, 2)]
+    # 입력에 중복이 있으면 결과에도 중복된 조합이 나올 수 있음
+    # 하지만 combinations() 자체는 중복된 조합을 의도적으로 생성하지는 않음
+    ```
+
+### 곱집합 (Cartesian Product)
+- 두 개 이상의 집합의 모든 가능한 순서쌍(또는 순서튜플)을 만든 것
+    - 마치 중첩된 for문처럼 작동
+    - 중복 순열의 개념과 동일
+- 원소를 중복해서 사용 가능
+- 순서를 중요하게 여김 (즉, (A, B) ≠ (B, A))
+- 기본 구조
+    ```
+    from itertools import product
+
+    itertools.product(*iterables, repeat=1)
+    ```
+    - *iterables: 반복 가능한 객체들
+    - repeat: 곱집합을 자기 자신과 몇 번 반복할지 지정 (기본값 1)
+- 반환값
+    - 튜플들의 반복자(iterator) 반환
+- 예시
+    ```
+    rom itertools import product
+
+    result = list(product('AB', repeat=2))
+    print(result)
+    # 출력: [('A', 'A'), ('A', 'B'), ('B', 'A'), ('B', 'B')]
+    # 'A'와 'B' 중 2개를 중복해서 골라, 가능한 모든 순열을 생성
+    ```
+
+### 중복 조합
+- 주어진 요소들 중에서 중복을 허용하면서 순서 없이 r개를 선택
+- 순서는 상관없고, 중복은 가능
+- 기본 구조
+    ```
+    from itertools import combinations_with_replacement
+
+    itertools.combinations_with_replacement(iterable, r)
+    ```
+    - iterable: 조합의 대상 (리스트, 문자열 등)
+    - r: 선택할 항목 개수
+- 반환값
+    - 중복을 허용하는 조합들을 생성하는 이터레이터(iterator)
+    - 중복 허용, 순서 비중 없음, 사전순(정렬된) 결과를 반환
+- 예시
+    ```
+    import itertools
+
+    data = ['A', 'B', 'C']
+    r = 2
+
+    result = itertools.combinations_with_replacement(data, r)
+
+    for item in result:
+        print(item)
+    
+    # 출력
+    ('A', 'A')
+    ('A', 'B')
+    ('A', 'C')
+    ('B', 'B')
+    ('B', 'C')
+    ('C', 'C')
+    ```
+
+### starmap()
+- 반복 가능한 자료형에 함수를 인자 여러 개로 분리해 적용할 때 사용
+- starmap은 map과 비슷하지만, 인자를 튜플을 풀어서(*args) 함수에 넘긴다는 점에서 차이가 존재
+- 기본 구조
+    ```
+    from itertools import starmap
+
+    itertools.starmap(function, iterable_of_args)
+    ```
+    - function: 호출할 함수
+    - iterable_of_args: 각각이 튜플(혹은 리스트)인 이터러블. 각 튜플은 function의 인자가 됨
+- 반환값
+    - function(*args)의 결과들을 순서대로 생성하는 이터레이터
+- 예시
+    ```
+    # 기본 사용
+    from itertools import starmap
+
+    def add(a, b):
+        return a + b
+
+    args = [(1, 2), (3, 4), (5, 6)]
+
+    result = starmap(add, args)
+
+    print(list(result))  # [3, 7, 11]
+    # 각 튜플 (a, b)가 add(a, b)로 호출됨
+    ```
 
 ## numpy 패키지
 
