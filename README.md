@@ -2815,6 +2815,17 @@
     python app.py
     ```
 - 가상환경 활성화된 경우 보통 터미널 명령어 줄 앞에 `(venv)`가 붙어 있음
+- PSSecurityException (PowerShell의 보안 정책 예외) 발생시
+    - 원인
+        - PowerShell의 ExecutionPolicy 설정이 너무 제한적으로 되어 있어서 .ps1 스크립트(여기서는 Activate.ps1) 실행이 차단됨
+    - 해결 방법
+        - 임시해결(현재 터미널에서만 허용) 명령어
+            ```
+            Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+            ```
+            - VSCode 닫으면 원상 복구됨
+        - 영구 해결(사용자 계정 전체 허용)
+        - CMD로 실행 (보안 정책 무시 가능)
 
 <br>
 
