@@ -3329,6 +3329,37 @@
         clean = text.strip().lower().replace("!", "")
         ```
 
+11. 문제 11
+    - 메모이제이션
+        - 재귀 함수 최적화에 자주 쓰는 필수 기법
+    - 직접 구현(딕셔너리 사용)
+        ```
+        memo = {}
+
+        def w(a, b, c):
+            if (a,b,c) in memo:
+                return memo[(a,b,c)]
+            
+            # 계산
+            if a <= 0 or b <= 0 or c <= 0:
+                result = 1
+            else:
+                result = w(a-1,b,c) + w(a,b-1,c)
+            
+            memo[(a,b,c)] = result  # 저장
+            return result
+        ```
+    - `functools.lru_cache` 사용
+        ```
+        from functools import lru_cache
+
+        @lru_cache(maxsize=None)  # 무제한 캐시
+        def w(a, b, c):
+            if a <= 0 or b <= 0 or c <= 0:
+                return 1
+            return w(a-1,b,c) + w(a,b-1,c)
+        ```
+        - `@lru_cache`를 붙이면 자동으로 함수 호출 결과를 저장
 <br>
 
 ---
