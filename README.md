@@ -2560,6 +2560,98 @@
     print("현재 deque 상태:", dq)  # 출력: 현재 deque 상태: deque([20, 30, 40])
     ```
 
+## DB 커서 객체 메서드 / 데이터베이스 조회 메서드
+
+### fetchone()
+- 쿼리 결과에서 한 행만 가져옴
+- 기본 구조
+    ```
+    cursor.execute("SELECT * FROM users")
+    row = cursor.fetchone()
+    ```
+- 반환값
+    - 쿼리 결과에서 한 행만 가져옴
+    - 더 이상 가져올 데이터가 없으면 None을 반환
+
+### fetchmany(size)
+- 쿼리 결과에서 지정한 개수(size)만큼의 행을 가져옴
+- 기본 구조
+    ```
+    cursor.execute("SELECT * FROM 테이블명")
+    rows = cursor.fetchmany(size)
+    ```
+- 반환값
+    - 결과를 리스트 형태로 반환
+
+### fetchall()
+- 쿼리 결과의 모든 행을 가져옴
+- 기본 구조
+    ```
+    cursor.execute("SELECT * FROM 테이블명")
+    rows = cursor.fetchall()
+    ```
+- 반환값
+    - 결과를 리스트 형태로 반환
+
+### 예시
+- fetchone(), fetchmany(), fetchall() 통합 예시
+    ```
+    from flask import Flask
+    from flask_mysqldb import MySQL
+
+    app = Flask(__name__)
+
+    # MySQL 연결 설정
+    app.config['MYSQL_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'root'
+    app.config['MYSQL_PASSWORD'] = '1234'
+    app.config['MYSQL_DB'] = 'testdb'
+
+    mysql = MySQL(app)
+
+    @app.route('/')
+    def index():
+        # 커서(cursor) 생성
+        cur = mysql.connection.cursor()
+
+        # SQL 실행
+        cur.execute("SELECT * FROM users")
+
+        # fetch 메서드들 사용 가능
+        one = cur.fetchone()      # 커서 위치에서 부터 한 행
+        many = cur.fetchmany(2)   # 한 행 이동한 커서 위치에서 두 행
+        all_rows = cur.fetchall() # 앞에서 이동한 커서 위치에서 전체 행
+
+        # 커서 닫기
+        cur.close()
+
+        return f"""
+        한 행: {one}<br>
+        두 행: {many}<br>
+        전체 행: {all_rows}
+        """
+
+    if __name__ == '__main__':
+        app.run(debug=True)
+
+    
+    # < users 테이블 > 의 경우
+    id  name    age
+    1   Alice   25
+    2   Bob     30
+    3   Charlie 22
+
+    # 출력
+    한 행: (1, 'Alice', 25)
+    두 행: [(2, 'Bob', 30), (3, 'Charlie', 22)]
+    전체 행: []
+    # 앞에서 한 행, 두 행 총 세 행을 이동해서 남은 행이 없으므로 fetchall()에서 빈 행 출력
+    
+    # 만약 fetchone()이나 fetchmany() 없이 fetchall()만 사용하면,
+    # 출력
+    [(1, 'Alice', 25), (2, 'Bob', 30), (3, 'Charlie', 22)]
+    ```
+
 <br>
 
 ---
