@@ -424,6 +424,116 @@
 
 <br>
 
+# 비동기 프로그래밍 async / await
+- 비동기 프로그래밍은 여러 작업을 동시에 처리하는 것처럼 보이게 하여 프로그램의 효율성과 속도를 높여줌
+- 특히 I/O 작업(예: 네트워크 요청, 파일 입출력, DB 요청)이 많은 프로그램에서 성능이 크게 향상
+- 비동기 프로그래밍이란?
+    - 일반적인 파이썬 코드는 순차적으로 실행
+        ```
+        A 실행 → A 끝날 때까지 기다림 → B 실행 → B 끝날 때까지 기다림 → C 실행
+        ```
+    - 비동기(async) 코드는 기다릴 필요가 있는 작업(I/O 등)을 시작해 놓고, 그동안 CPU가 놀지 않도록 다른 작업을 먼저 처리
+        ```
+        A 실행 → A가 기다리는 동안 B 실행 → B가 기다리는 동안 C 실행 …
+        ```
+- I/O 작업에만 효과적
+    - CPU 작업에는 효과 X
+    - 비동기는 “기다리는 작업”을 효율적으로 처리하는 방식
+    - CPU 계산이 많은 작업은 비동기와 잘 맞지 않음
+
+## async / await
+- 핵심 문법
+    1. async def
+        - 비동기 함수를 정의할 때 사용
+        - 이 함수는 코루틴(coroutine)이 됨
+            - 코루틴: 실행을 중단했다가 나중에 다시 이어서 실행할 수 있는 함수
+                - 실행 중 yield 지점에서 멈출 수 있음
+                - 나중에 멈춘 지점부터 다시 실행됨
+                - 여러 코루틴이 서로 협력(Co-operative) 하면서 실행됨
+                - 스레드처럼 병렬로 동작하는 것처럼 보이지만 실제로는 코드가 서로 양보하며 협력적으로 실행되는 흐름을 만드는 것
+            - 서브루틴: 일반 함수, 호출되면 시작부터 끝까지 한 번에 실행, 실행 중에는 다른 코드를 끼워 넣기 어려움
+        - 예시
+            ```
+            async def my_func():
+                return 1
+            ```
+    1. await
+        - 다른 비동기 함수(코루틴)의 실행을 잠시 “기다렸다가” 결과를 받음
+        - await는 반드시 async 함수 내부에서만 사용 가능
+        - 예시
+            ```
+            async def main():
+                result = await my_func()
+            ```
+    1. asyncio.run()
+        - 프로그램의 최상단(entry point)에서 비동기 코드를 실행할 때 사용
+        - 비동기 함수는 일반 함수처럼 직접 실행할 수 없기 때문
+        - 예시
+            ```
+            import asyncio
+
+            asyncio.run(main())
+            ```
+        - asyncio.run()은 비동기 프로그램의 시동 장치
+        - asyncio.run()이 하는 일
+            1. 이벤트 루프(event loop) 생성
+            1. 지정된 비동기 함수 실행
+            1. 모든 작업 종료 시 이벤트 루프 정리/닫기
+- 전체 구조 예시: API 요청 여러 개 동시 처리
+    ```
+    import asyncio
+    import aiohttp
+
+    async def fetch(session, url):
+        async with session.get(url) as resp:
+            return await resp.text()
+
+    async def main():
+        urls = ["https://example.com", "https://google.com", "https://python.org"]
+
+        async with aiohttp.ClientSession() as session:
+            results = await asyncio.gather(*[
+                fetch(session, url) for url in urls
+            ])
+
+        for r in results:
+            print("응답 길이:", len(r))
+
+    if __name__ == "__main__":
+        asyncio.run(main())
+    ```
+- async / await 구성 요소
+    - 필수 요소
+        | 요소              | 설명                             |
+        | --------------- | ------------------------------ |
+        | `async def`     | 비동기 함수(코루틴)를 정의하는 문법           |
+        | `await`         | 다른 비동기 함수를 호출할 때 사용 (I/O를 기다림) |
+        | `asyncio.run()` | 비동기 프로그램의 시작점에서 코루틴 실행         |
+    - 선택 요소 (상황에 따라 사용)
+        | 요소                               | 설명                              |
+        | -------------------------------- | ------------------------------- |
+        | `asyncio.sleep()`                | 테스트용 딜레이, I/O 대기 시뮬레이션          |
+        | `asyncio.gather()`               | 여러 비동기 작업을 동시에 실행               |
+        | `asyncio.create_task()`          | 백그라운드에서 태스크를 미리 실행              |
+        | `asyncio.Event, Lock, Semaphore` | 비동기 환경에서 공유 자원 제어               |
+        | `asyncio.to_thread()`            | CPU 작업을 스레드에서 처리하고 비동기적으로 await |
+- 핵심 개념 정리
+    | 핵심 개념         | 설명                  |
+    | ------------- | ------------------- |
+    | async         | 비동기 함수 선언           |
+    | await         | 다른 비동기 함수를 기다릴 때 사용 |
+    | coroutine     | async 함수가 반환하는 객체   |
+    | event loop    | 비동기 작업을 관리하는 엔진     |
+    | asyncio.run() | 비동기 프로그램 시작점        |
+    | gather        | 여러 작업을 동시에 실행       |
+    | create_task   | 백그라운드에서 태스크 예약      |
+
+<br>
+
+---
+
+<br>
+
 # 키워드 (예약어)
 
 ## lambda
